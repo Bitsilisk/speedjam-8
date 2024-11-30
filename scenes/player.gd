@@ -2,31 +2,30 @@ extends CharacterBody2D
 
 const SLAM_SENSITIVITY:float = 10
 const TOP_SPEED:float = 300
+const TOP_FLOW_SPEED:float = 500
 const SPEED:float = .25
 const JUMP_SPEED:float = 300
 const WALL_DISTANCE:int = 16
 const COYOTE_LENGTH:float = .1
-
-@export var flow_speed_increase_by = 3
-@export var flow_speed_dropoff = 1
+const FLOW_SPEED_PERCENT:float = .75
+const FLOW_BUILD_RATE = 10
+const FLOW_DECAY_RATE = 1
 
 @onready var camera = $PhantomCamera2D
 @onready var forward_raycast:RayCast2D = $RayCast2D
 @onready var player_ui = $player_ui
 @onready var heart_particales = $GPUParticles2D
-
-# Flow, increases top speed
-var flow:float = 0
 @onready var sfx_jump: AudioStreamPlayer = $sfx_jump
 @onready var sfx_wallkick: AudioStreamPlayer = $sfx_wallkick
 @onready var sfx_land: AudioStreamPlayer = $sfx_land
 
-var flow_bar
-var flow_release: bool
+# Flow, increases top speed
+var flow:float = 0
 
 var last_velocity:Vector2
 var coyote_time:float = 0
 var stunned:bool
+var on_wall:bool = false
 
 func is_on_coyote_floor(delta:float) -> bool:
 	if is_on_floor():
@@ -37,15 +36,14 @@ func is_on_coyote_floor(delta:float) -> bool:
 
 func _physics_process(delta):
 	rotate_raycast()
-	add_flow_progress()
-	release_flow()
 	check_stun()
 	apply_gravity(delta)
 	handle_input(delta)
-	camera.follow_offset = velocity * Vector2(.8,.5)
+	camera.follow_offset = velocity * Vector2(.2,.1)
 	if not is_zero_approx(velocity.x):
 		last_velocity = velocity
 	move_and_slide()
+	check_flow_state()
 
 func handle_input(delta:float):
 	var jump_input:bool = Input.is_action_just_pressed("jump")
@@ -56,16 +54,27 @@ func handle_input(delta:float):
 		else:
 			var new_direction = get_input_direction()
 			var new_velocity:float = new_direction * SPEED * delta * 1000.
-			if abs(velocity.x + new_velocity) < TOP_SPEED + flow:
+			if abs(velocity.x + new_velocity) < get_top_speed():
 				if new_direction != sign(last_velocity.x):
 					new_velocity *= 2
 				velocity.x += new_velocity
 	else:
 		if jump_input and forward_raycast.is_colliding():
-			velocity.x = TOP_SPEED * -sign(last_velocity.x)
+			velocity.x = get_top_speed() * -sign(last_velocity.x)
 			jump()
 			sfx_wallkick.play()
-
+			
+	if Input.is_action_pressed("use_flow") and not is_zero_approx(player_ui.flow_bar.value):
+		flow += FLOW_BUILD_RATE
+		player_ui.flow_bar.value -= 0.5
+		heart_particales.emitting = true
+	else:
+		heart_particales.emitting = false
+		flow = max(0, flow-FLOW_DECAY_RATE)
+		
+func get_top_speed():
+	return min(TOP_FLOW_SPEED, TOP_SPEED + flow)
+	
 func apply_gravity(delta:float):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -73,10 +82,15 @@ func apply_gravity(delta:float):
 func check_stun():
 	var movement_direction:int = sign(velocity.x)
 	if movement_direction == 0:
-		if abs(last_velocity.x) >= TOP_SPEED-SLAM_SENSITIVITY and is_on_floor():
+		var on_floor:bool = is_on_floor()
+		if abs(last_velocity.x) >= TOP_SPEED-SLAM_SENSITIVITY and on_floor:
 			stunned = true
+			on_wall = false
+		elif not on_floor:
+			on_wall = true
 	else:
 		stunned = false
+		on_wall = false
 	
 func jump():
 	stunned = false
@@ -89,21 +103,11 @@ func get_input_direction() -> int:
 func rotate_raycast():
 	forward_raycast.target_position.x = WALL_DISTANCE * sign(last_velocity.x)
 
-func add_flow_progress():
-	#if going at top speed on the floor
-	if velocity.length() > 295 && is_on_floor() && !flow_release:
-		player_ui.flow_bar.value += 1
-		
-	# if close to edge and pressed jump 
-	 #flow + 10
+func is_flow_speed() -> bool:
+	return abs(velocity.x) > TOP_SPEED * FLOW_SPEED_PERCENT
 
-func release_flow():
-	flow_release = Input.is_action_pressed("flow_release")
-	
-	if flow_release && player_ui.flow_bar.value > 0.5 && !is_on_floor():
-		heart_particales.emitting = true
-		player_ui.flow_bar.value -= 0.5
-		flow += flow_speed_increase_by
+func check_flow_state():
+	if is_flow_speed():
+		player_ui.flow_bar.value += 1
 	else:
-		flow = max(0, flow-flow_speed_dropoff)
-		heart_particales.emitting = false
+		player_ui.flow_bar.value -= 1

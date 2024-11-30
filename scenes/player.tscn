@@ -1,10 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://domm6pbbbfsyr"]
+[gd_scene load_steps=32 format=3 uid="uid://domm6pbbbfsyr"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_j1fod"]
 [ext_resource type="Texture2D" uid="uid://cfnju1d77dxus" path="res://assets/sprites/player.png" id="2_5ntw6"]
 [ext_resource type="Script" path="res://scenes/animation_player.gd" id="3_kuqbb"]
 [ext_resource type="Texture2D" uid="uid://dlhtreyg365bu" path="res://assets/vfx/heart.png" id="4_68m44"]
-[ext_resource type="Script" path="res://scenes/player_camera.gd" id="4_osvtq"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="4_v484h"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_kljcr"]
 [ext_resource type="PackedScene" uid="uid://dyxx0rqk7uwp5" path="res://scenes/player_ui.tscn" id="5_prpfk"]
 [ext_resource type="AudioStream" uid="uid://c500eww8uikyx" path="res://assets/audio/sfx/icy_jump1.wav" id="8_id4vu"]
 [ext_resource type="AudioStream" uid="uid://crl3u6up67mag" path="res://assets/audio/sfx/icy_wallkick1.wav" id="9_3huay"]
@@ -245,6 +246,12 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ukklg"]
 size = Vector2(7, 14)
 
+[sub_resource type="Resource" id="Resource_bosl4"]
+script = ExtResource("5_kljcr")
+duration = 1.0
+transition = 0
+ease = 2
+
 [sub_resource type="Curve" id="Curve_1kerf"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.238845, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
@@ -277,7 +284,7 @@ texture_filter = 1
 texture = ExtResource("2_5ntw6")
 hframes = 8
 vframes = 7
-frame = 33
+frame = 28
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
 }
@@ -306,14 +313,12 @@ position = Vector2(0.5, 6)
 shape = SubResource("RectangleShape2D_ukklg")
 metadata/_edit_lock_ = true
 
-[node name="PhantomCamera2D" type="Node2D" parent="."]
-script = ExtResource("4_osvtq")
+[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+script = ExtResource("4_v484h")
 follow_mode = 2
-zoom = Vector2(1.6, 1.6)
-snap_to_pixel = true
-tween_on_load = false
+follow_target = NodePath("..")
+tween_resource = SubResource("Resource_bosl4")
 follow_damping = true
-follow_damping_value = Vector2(0.5, 0.5)
 metadata/_edit_lock_ = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
