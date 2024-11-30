@@ -40,6 +40,7 @@ theme_override_constants/margin_right = 20
 script = ExtResource("2_ysbhn")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="hud/MarginContainer/combo_container"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0

@@ -10,10 +10,10 @@ var level_idx: int = 0
 var total_time := 0
 var allowed_to_restart = false
 #level_name
-func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("restart") && allowed_to_restart:
-		get_tree().paused = false
-		load_level(level_idx)
+#func _input(event: InputEvent) -> void:
+	#if Input.is_action_just_pressed("restart") && allowed_to_restart:
+		#get_tree().paused = false
+		#load_level(level_idx)
 
 func load_level(idx: int):
 	unload_level()

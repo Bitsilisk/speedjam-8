@@ -94,7 +94,7 @@ func add_flow_progress():
 func release_flow():
 	flow_release = Input.is_action_pressed("flow_release")
 	
-	if flow_release && player_ui.flow_bar.value > 0.5:
+	if flow_release && player_ui.flow_bar.value > 0.5 && !is_on_floor():
 		heart_particales.emitting = true
 		player_ui.flow_bar.value -= 0.5
 		top_speed += flow_speed_increase_by

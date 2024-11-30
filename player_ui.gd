@@ -10,7 +10,14 @@ var total_time := 0
 func _ready():
 	timer.start()
 
-
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("restart"):
+		get_tree().paused = false
+		if get_tree().current_scene.has_method('reload_level'):
+			get_parent().current_scene.reload_level()
+		else:
+			get_tree().reload_current_scene()
+		
 func _on_timer_timeout() -> void:
 	total_time += 1
 	var min = int(total_time / 60)
