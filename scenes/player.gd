@@ -12,6 +12,10 @@ extends CharacterBody2D
 
 @onready var player_ui = $player_ui
 @onready var heart_particales = $GPUParticles2D
+@onready var sfx_jump: AudioStreamPlayer = $sfx_jump
+@onready var sfx_wallkick: AudioStreamPlayer = $sfx_wallkick
+@onready var sfx_land: AudioStreamPlayer = $sfx_land
+
 var flow_bar
 var flow_release: bool
 
@@ -24,6 +28,7 @@ func floor_check(delta:float):
 		return true
 	coyote_time += delta
 	return coyote_time < coyote_amount
+	
 
 func _physics_process(delta):
 	rotate_raycast()
@@ -44,9 +49,11 @@ func _physics_process(delta):
 			velocity.x = top_speed * -last_direction
 			velocity.y = -jump_speed
 			coyote_time = 10
+			sfx_wallkick.play()
 	elif jump_input:
 		velocity.y = -jump_speed
 		coyote_time = 10
+		sfx_jump.play()
 	else:
 		var new_direction = get_direction()
 		var new_velocity:float = velocity.x + new_direction * speed * delta * 1000.
