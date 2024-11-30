@@ -15,6 +15,8 @@ const COYOTE_LENGTH:float = .1
 @onready var player_ui = $player_ui
 @onready var heart_particales = $GPUParticles2D
 
+# Flow, increases top speed
+var flow:float = 0
 var flow_bar
 var flow_release: bool
 
@@ -49,7 +51,7 @@ func handle_input(delta:float):
 		else:
 			var new_direction = get_input_direction()
 			var new_velocity:float = new_direction * SPEED * delta * 1000.
-			if abs(velocity.x + new_velocity) < TOP_SPEED:
+			if abs(velocity.x + new_velocity) < TOP_SPEED + flow:
 				if new_direction != sign(last_velocity.x):
 					new_velocity *= 2
 				velocity.x += new_velocity
@@ -95,8 +97,7 @@ func release_flow():
 	if flow_release && player_ui.flow_bar.value > 0.5 && !is_on_floor():
 		heart_particales.emitting = true
 		player_ui.flow_bar.value -= 0.5
-		#top_speed += flow_speed_increase_by
+		flow += flow_speed_increase_by
 	else:
-		#top_speed -= flow_speed_dropoff
-		#top_speed = clamp(top_speed, 300, 500)
+		flow = max(0, flow-flow_speed_dropoff)
 		heart_particales.emitting = false
