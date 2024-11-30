@@ -7,6 +7,7 @@ extends CharacterBody2D
 
 @onready var camera = $PhantomCamera2D
 @onready var forward_raycast:RayCast2D = $RayCast2D
+@onready var animation_player = $AnimatedSprite2D
 var last_direction:int = 0
 var coyote_time:float = 0
 
@@ -18,18 +19,18 @@ func floor_check(delta:float):
 	return coyote_time < coyote_amount
 	
 func _physics_process(delta):
-		
+	rotate_raycast()
 	var jump_input:bool = Input.is_action_just_pressed("jump")
 	var movement_direction:int = sign(velocity.x)
 	if movement_direction != 0:
 		last_direction = movement_direction
-	
+
 	var on_floor:bool = floor_check(delta)
 #	This looks weird, but we don't want coyote time affecting actual gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	if not on_floor:
-		forward_raycast.target_position.x = wall_distance * last_direction
+		#rotate_raycast()
 		if jump_input and forward_raycast.is_colliding():
 			velocity.x = top_speed * -last_direction
 			velocity.y = -jump_speed
@@ -53,4 +54,7 @@ func _physics_process(delta):
 
 func get_direction() -> int:
 	return sign(Input.get_axis("move_left", "move_right"))
+
+func rotate_raycast():
+	forward_raycast.target_position.x = wall_distance * last_direction
 	

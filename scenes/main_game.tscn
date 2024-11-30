@@ -51,11 +51,11 @@ script = ExtResource("2_gq2q6")
 
 [node name="all_score" type="Label" parent="main_menu/HBoxContainer/leaderboard"]
 layout_mode = 2
-text = "Smth"
+text = "Loading leaderboard"
 
 [node name="player_score" type="Label" parent="main_menu/HBoxContainer/leaderboard"]
 layout_mode = 2
-text = "Smth"
+text = "Loading your score"
 
 [node name="current_name" type="Label" parent="main_menu/HBoxContainer/leaderboard"]
 layout_mode = 2

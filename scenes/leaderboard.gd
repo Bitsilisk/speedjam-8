@@ -28,7 +28,7 @@ func _ready():
 
 func load_new_info(new_score):
 	_upload_score(new_score)
-	update_info()
+	#update_info()
 	
 	
 func _process(delta: float) -> void:
