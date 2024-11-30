@@ -3,8 +3,10 @@
 [ext_resource type="Script" path="res://scenes/pause_menu.gd" id="1_5o1ba"]
 
 [node name="pause_menu" type="CanvasLayer"]
+process_mode = 3
 
 [node name="pause_menu" type="MarginContainer" parent="."]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -18,7 +20,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="resume" type="Button" parent="pause_menu/VBoxContainer"]
-process_mode = 3
 layout_mode = 2
 text = "Resume"
 

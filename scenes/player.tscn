@@ -519,7 +519,6 @@ amount = 50
 process_material = SubResource("ParticleProcessMaterial_f3mnl")
 texture = ExtResource("4_68m44")
 lifetime = 0.2
-one_shot = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(16, 0)
@@ -529,5 +528,5 @@ target_position = Vector2(16, 0)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_iofmc")
 animation = &"spin"
-frame_progress = 0.793128
+frame_progress = 0.182747
 script = ExtResource("7_nqhca")

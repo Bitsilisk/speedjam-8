@@ -18,8 +18,11 @@ func update_animation():
 		fell_down = true
 		#animation_player.flip_h = false
 		return
+	fell_down = false
 
-	if dir == 0:
+	if !player.is_on_floor() && player.flow_release:
+		play('spin')
+	elif dir == 0:
 		play("idle")
 	elif dir == 1:
 		flip_h = false

@@ -6,7 +6,6 @@ var paused := false
 func _ready() -> void:
 	self.hide()
 
-
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("escape"):
 		pause_menu()

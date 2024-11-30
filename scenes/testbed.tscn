@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_syhr8"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_n04ni"]
-tile_data = PackedInt32Array(0, 196609, 16, 65536, 196609, 17, 131072, 589825, 7)
+tile_data = PackedInt32Array(65536, 196609, 17, 131072, 589825, 7)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_apkoh"]
 texture = ExtResource("1_c010y")
@@ -1801,7 +1801,7 @@ process_physics_priority = 300
 script = ExtResource("5_syhr8")
 
 [node name="level_end" type="Area2D" parent="."]
-position = Vector2(-251, 78)
+position = Vector2(-1095, 1243)
 collision_layer = 4
 script = ExtResource("4_04eov")
 metadata/_edit_group_ = true

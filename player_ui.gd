@@ -3,7 +3,9 @@ extends CanvasLayer
 var total_time := 0
 
 @onready var timer = $Timer
-@onready var time_display = $Control/MarginContainer/VBoxContainer/time
+@onready var time_display = $hud/MarginContainer/timer/VBoxContainer/time
+@onready var combo_container = $hud/MarginContainer/combo_container
+@onready var flow_bar: ProgressBar = $hud/MarginContainer/MarginContainer/ProgressBar
 
 func _ready():
 	timer.start()

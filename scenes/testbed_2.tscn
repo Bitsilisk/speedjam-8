@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scenes/level_end.gd" id="5_3cxhj"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_n04ni"]
-tile_data = PackedInt32Array(0, 196609, 16, 65536, 196609, 17, 131072, 589825, 7)
+tile_data = PackedInt32Array(65536, 196609, 17, 131072, 589825, 7)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_duy8y"]
 texture = ExtResource("1_x57sf")

@@ -1,12 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dyxx0rqk7uwp5"]
+[gd_scene load_steps=8 format=3 uid="uid://dyxx0rqk7uwp5"]
 
 [ext_resource type="Script" path="res://player_ui.gd" id="1_in8xn"]
+[ext_resource type="Texture2D" uid="uid://w7ksjnesw8i1" path="res://assets/ui/arrow_up.png" id="2_gvou3"]
 [ext_resource type="PackedScene" uid="uid://b2kupenuwne5a" path="res://scenes/pause_menu.tscn" id="2_shlir"]
+[ext_resource type="Script" path="res://scenes/combo_container.gd" id="2_ysbhn"]
+[ext_resource type="Texture2D" uid="uid://25m70lysotvt" path="res://assets/ui/arrow_left.png" id="4_p338t"]
+[ext_resource type="Texture2D" uid="uid://b4xu4hgfiqnwy" path="res://assets/ui/arrow_right.png" id="5_bmf7v"]
+[ext_resource type="Texture2D" uid="uid://7ixm3nq41vg4" path="res://assets/ui/arrow_down.png" id="6_2xcan"]
 
 [node name="player_ui" type="CanvasLayer" groups=["player_ui"]]
+layer = 2
 script = ExtResource("1_in8xn")
 
-[node name="Control" type="Control" parent="."]
+[node name="hud" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +20,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
+[node name="MarginContainer" type="MarginContainer" parent="hud"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,16 +29,66 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+[node name="combo_container" type="MarginContainer" parent="hud/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+script = ExtResource("2_ysbhn")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="hud/MarginContainer/combo_container"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="arrow_up" type="TextureRect" parent="hud/MarginContainer/combo_container/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_gvou3")
+
+[node name="arrow_left" type="TextureRect" parent="hud/MarginContainer/combo_container/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_p338t")
+
+[node name="arrow_right" type="TextureRect" parent="hud/MarginContainer/combo_container/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_bmf7v")
+
+[node name="arrow_down" type="TextureRect" parent="hud/MarginContainer/combo_container/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_2xcan")
+
+[node name="timer" type="MarginContainer" parent="hud/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="hud/MarginContainer/timer"]
 layout_mode = 2
 
-[node name="time" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+[node name="time" type="Label" parent="hud/MarginContainer/timer/VBoxContainer"]
 layout_mode = 2
 text = "00:00"
+
+[node name="MarginContainer" type="MarginContainer" parent="hud/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ProgressBar" type="ProgressBar" parent="hud/MarginContainer/MarginContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
 
 [node name="pause_menu" parent="." instance=ExtResource("2_shlir")]
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+rotation = -1.5708
+texture = ExtResource("2_gvou3")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
