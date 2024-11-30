@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://domm6pbbbfsyr"]
+[gd_scene load_steps=11 format=3 uid="uid://domm6pbbbfsyr"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_j1fod"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="2_8elxy"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_j1ua0"]
 [ext_resource type="Texture2D" uid="uid://dlhtreyg365bu" path="res://assets/vfx/heart.png" id="4_68m44"]
+[ext_resource type="PackedScene" uid="uid://dyxx0rqk7uwp5" path="res://scenes/player_ui.tscn" id="5_prpfk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ukklg"]
 size = Vector2(18, 18)
@@ -37,7 +38,8 @@ damping_max = 1.0
 scale_min = 0.0
 alpha_curve = SubResource("CurveTexture_qjo6s")
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 5
 script = ExtResource("1_j1fod")
 speed = 0.25
 top_speed = 300.0
@@ -83,3 +85,5 @@ one_shot = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(16, 0)
+
+[node name="player_ui" parent="." instance=ExtResource("5_prpfk")]

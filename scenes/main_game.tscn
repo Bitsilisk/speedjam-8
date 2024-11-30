@@ -1,19 +1,48 @@
-[gd_scene format=3 uid="uid://bx3n8pi2plujw"]
+[gd_scene load_steps=2 format=3 uid="uid://bx3n8pi2plujw"]
+
+[ext_resource type="Script" path="res://scenes/main_game.gd" id="1_i4yg0"]
 
 [node name="MainGame" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_i4yg0")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="main_menu" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="main_menu"]
 layout_mode = 2
-text = "TIME:"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="main_menu/HBoxContainer"]
+layout_mode = 2
+
+[node name="start" type="Button" parent="main_menu/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="choose_level" type="Button" parent="main_menu/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Choose Level"
+
+[node name="credits" type="Button" parent="main_menu/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+
+[node name="main_2d" type="Node2D" parent="."]
+process_mode = 1
+
+[connection signal="pressed" from="main_menu/HBoxContainer/VBoxContainer/start" to="." method="_on_start_pressed"]

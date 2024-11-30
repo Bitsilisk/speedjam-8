@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://3jyy2ushgi0"]
+[gd_scene load_steps=8 format=4 uid="uid://3jyy2ushgi0"]
 
 [ext_resource type="Texture2D" uid="uid://dmgge8uf0fs4l" path="res://assets/temp/test_floor.png" id="1_jec3v"]
 [ext_resource type="PackedScene" uid="uid://domm6pbbbfsyr" path="res://scenes/player.tscn" id="2_mgii0"]
+[ext_resource type="Script" path="res://scenes/level_end.gd" id="4_04eov"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_syhr8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_re70t"]
@@ -14,6 +15,9 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_re70t")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w2hj4"]
+height = 218.0
 
 [node name="Testbed" type="Node2D"]
 
@@ -33,3 +37,14 @@ metadata/_edit_lock_ = true
 process_priority = 300
 process_physics_priority = 300
 script = ExtResource("5_syhr8")
+
+[node name="level_end" type="Area2D" parent="."]
+position = Vector2(1119, -88)
+collision_layer = 4
+script = ExtResource("4_04eov")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level_end"]
+shape = SubResource("CapsuleShape2D_w2hj4")
+
+[connection signal="body_entered" from="level_end" to="level_end" method="_on_body_entered"]
