@@ -24,15 +24,19 @@ func _physics_process(delta):
 	if movement_direction != 0:
 		last_direction = movement_direction
 	
-	
+	var on_floor:bool = floor_check(delta)
+#	This looks weird, but we don't want coyote time affecting actual gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	if not on_floor:
 		forward_raycast.target_position.x = wall_distance * last_direction
 		if jump_input and forward_raycast.is_colliding():
 			velocity.x = top_speed * -last_direction
 			velocity.y = -jump_speed
+			coyote_time = 10
 	elif jump_input:
 		velocity.y = -jump_speed
+		coyote_time = 10
 	else:
 		var new_direction = get_direction()
 		var new_velocity:float = velocity.x + new_direction * speed * delta * 1000.
