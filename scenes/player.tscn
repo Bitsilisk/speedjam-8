@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://domm6pbbbfsyr"]
+[gd_scene load_steps=29 format=3 uid="uid://domm6pbbbfsyr"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_j1fod"]
 [ext_resource type="Texture2D" uid="uid://cfnju1d77dxus" path="res://assets/sprites/player.png" id="2_5ntw6"]
@@ -216,13 +216,17 @@ tracks/0/keys = {
 "values": [46, 47, 48]
 }
 
-[sub_resource type="Animation" id="Animation_m7sp1"]
-resource_name = "crying"
+[sub_resource type="Animation" id="Animation_k4x4n"]
+resource_name = "crying_right"
+
+[sub_resource type="Animation" id="Animation_rf4jh"]
+resource_name = "crying_left"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_we8nw"]
 _data = {
 "air": SubResource("Animation_l1f8a"),
-"crying": SubResource("Animation_m7sp1"),
+"crying_left": SubResource("Animation_rf4jh"),
+"crying_right": SubResource("Animation_k4x4n"),
 "fall_right": SubResource("Animation_g50t7"),
 "falling_left": SubResource("Animation_nchdu"),
 "idle": SubResource("Animation_fbmr7"),

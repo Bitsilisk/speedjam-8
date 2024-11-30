@@ -14,7 +14,7 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("restart"):
 		get_tree().paused = false
 		if get_tree().current_scene.has_method('reload_level'):
-			get_parent().current_scene.reload_level()
+			get_tree().current_scene.reload_level()
 		else:
 			get_tree().reload_current_scene()
 		

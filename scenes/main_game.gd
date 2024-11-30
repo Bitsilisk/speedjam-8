@@ -15,13 +15,15 @@ var allowed_to_restart = false
 		#get_tree().paused = false
 		#load_level(level_idx)
 
+func reload_level():
+	load_level(level_idx)
+
 func load_level(idx: int):
 	unload_level()
 	main_menu.hide()
 	var level_r = load(levels[idx])
 	
 	if level_r:
-	#	level_instance = level_r.instance()
 		level_instance = level_r.instantiate()
 		level_idx = idx
 		main2d.add_child(level_instance)
@@ -40,7 +42,6 @@ func level_finish():
 	print('next level')
 	if levels.size() == (level_idx + 1):
 		leaderboard.load_new_info(total_time)
-		
 		# show smth
 	else:
 		load_level(level_idx + 1)

@@ -12,18 +12,11 @@ extends CharacterBody2D
 
 @onready var player_ui = $player_ui
 @onready var heart_particales = $GPUParticles2D
-var combo_container
 var flow_bar
 var flow_release: bool
 
-var combo_arr := [['left', 'up', 'down']]
-var combo_allowed := false
-
 var last_direction:int = 0
 var coyote_time:float = 0
-
-func _ready() -> void:
-	combo_container = player_ui.combo_container
 
 func floor_check(delta:float):
 	if is_on_floor():
@@ -34,7 +27,6 @@ func floor_check(delta:float):
 
 func _physics_process(delta):
 	rotate_raycast()
-	combo_shower()
 	add_flow_progress()
 	release_flow()
 	
@@ -46,7 +38,6 @@ func _physics_process(delta):
 	var on_floor:bool = floor_check(delta)
 #	This looks weird, but we don't want coyote time affecting actual gravity.
 	if not is_on_floor():
-		combo_allowed = true
 		velocity += get_gravity() * delta
 	if not on_floor:
 		if jump_input and forward_raycast.is_colliding():
@@ -57,7 +48,6 @@ func _physics_process(delta):
 		velocity.y = -jump_speed
 		coyote_time = 10
 	else:
-		combo_allowed = false
 		var new_direction = get_direction()
 		var new_velocity:float = velocity.x + new_direction * speed * delta * 1000.
 		if abs(new_velocity) < top_speed:
@@ -71,15 +61,6 @@ func _physics_process(delta):
 	camera.follow_offset = velocity * Vector2(.8,.2)
 	move_and_slide()
 
-var combo_once = true
-func combo_shower():
-	if combo_allowed && combo_once:
-		combo_once = false
-		combo_container.show_with(combo_arr.pick_random())
-	else:
-		combo_once = true
-		combo_container.wipe()
-
 func get_direction() -> int:
 	return sign(Input.get_axis("move_left", "move_right"))
 
@@ -90,6 +71,9 @@ func add_flow_progress():
 	#if going at top speed on the floor
 	if velocity.length() > 295 && is_on_floor() && !flow_release:
 		player_ui.flow_bar.value += 1	
+		
+	# if close to edge and pressed jump 
+	 #flow + 10
 
 func release_flow():
 	flow_release = Input.is_action_pressed("flow_release")
