@@ -1,76 +1,90 @@
 extends CharacterBody2D
-@export var speed:float
-@export var top_speed:float = 10
-@export var jump_speed:float = 500
-@export var wall_distance:int = 16
-@export var coyote_amount = .5
+
+const SLAM_SENSITIVITY:float = 10
+const TOP_SPEED:float = 300
+const SPEED:float = .25
+const JUMP_SPEED:float = 300
+const WALL_DISTANCE:int = 16
+const COYOTE_LENGTH:float = .1
+
 @export var flow_speed_increase_by = 3
 @export var flow_speed_dropoff = 1
 
 @onready var camera = $PhantomCamera2D
 @onready var forward_raycast:RayCast2D = $RayCast2D
-
 @onready var player_ui = $player_ui
 @onready var heart_particales = $GPUParticles2D
+
 var flow_bar
 var flow_release: bool
 
-var last_direction:int = 0
+var last_velocity:Vector2
 var coyote_time:float = 0
+var stunned:bool
 
-func floor_check(delta:float):
+func is_on_coyote_floor(delta:float) -> bool:
 	if is_on_floor():
 		coyote_time = 0
 		return true
 	coyote_time += delta
-	return coyote_time < coyote_amount
+	return coyote_time < COYOTE_LENGTH
 
 func _physics_process(delta):
 	rotate_raycast()
 	add_flow_progress()
 	release_flow()
-	
-	var jump_input:bool = Input.is_action_just_pressed("jump")
-	var movement_direction:int = sign(velocity.x)
-	if movement_direction != 0:
-		last_direction = movement_direction
-
-	var on_floor:bool = floor_check(delta)
-#	This looks weird, but we don't want coyote time affecting actual gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-	if not on_floor:
-		if jump_input and forward_raycast.is_colliding():
-			velocity.x = top_speed * -last_direction
-			velocity.y = -jump_speed
-			coyote_time = 10
-	elif jump_input:
-		velocity.y = -jump_speed
-		coyote_time = 10
-	else:
-		var new_direction = get_direction()
-		var new_velocity:float = velocity.x + new_direction * speed * delta * 1000.
-		if abs(new_velocity) < top_speed:
-			if new_direction != sign(last_direction):
-				new_velocity = velocity.x + new_direction * speed * delta * 1000. * 2
-			velocity.x = new_velocity
-	
-	if forward_raycast.is_colliding():
-		var collider = forward_raycast.get_collider()
-		
-	camera.follow_offset = velocity * Vector2(.8,.2)
+	check_stun()
+	apply_gravity(delta)
+	handle_input(delta)
+	camera.follow_offset = velocity * Vector2(.8,.5)
+	if not is_zero_approx(velocity.x):
+		last_velocity = velocity
 	move_and_slide()
 
-func get_direction() -> int:
+func handle_input(delta:float):
+	var jump_input:bool = Input.is_action_just_pressed("jump")
+	if is_on_coyote_floor(delta):
+		if jump_input:
+			jump()
+		else:
+			var new_direction = get_input_direction()
+			var new_velocity:float = new_direction * SPEED * delta * 1000.
+			if abs(velocity.x + new_velocity) < TOP_SPEED:
+				if new_direction != sign(last_velocity.x):
+					new_velocity *= 2
+				velocity.x += new_velocity
+	else:
+		if jump_input and forward_raycast.is_colliding():
+			velocity.x = TOP_SPEED * -sign(last_velocity.x)
+			jump()
+
+func apply_gravity(delta:float):
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+		
+func check_stun():
+	var movement_direction:int = sign(velocity.x)
+	if movement_direction == 0:
+		if abs(last_velocity.x) >= TOP_SPEED-SLAM_SENSITIVITY and is_on_floor():
+			stunned = true
+	else:
+		stunned = false
+	
+func jump():
+	stunned = false
+	velocity.y = -JUMP_SPEED
+	coyote_time = 10
+	
+func get_input_direction() -> int:
 	return sign(Input.get_axis("move_left", "move_right"))
 
 func rotate_raycast():
-	forward_raycast.target_position.x = wall_distance * last_direction
+	forward_raycast.target_position.x = WALL_DISTANCE * sign(last_velocity.x)
 
 func add_flow_progress():
 	#if going at top speed on the floor
 	if velocity.length() > 295 && is_on_floor() && !flow_release:
-		player_ui.flow_bar.value += 1	
+		player_ui.flow_bar.value += 1
 		
 	# if close to edge and pressed jump 
 	 #flow + 10
@@ -81,8 +95,8 @@ func release_flow():
 	if flow_release && player_ui.flow_bar.value > 0.5 && !is_on_floor():
 		heart_particales.emitting = true
 		player_ui.flow_bar.value -= 0.5
-		top_speed += flow_speed_increase_by
+		#top_speed += flow_speed_increase_by
 	else:
-		top_speed -= flow_speed_dropoff
-		top_speed = clamp(top_speed, 300, 500)
+		#top_speed -= flow_speed_dropoff
+		#top_speed = clamp(top_speed, 300, 500)
 		heart_particales.emitting = false

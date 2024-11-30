@@ -1,45 +1,35 @@
 extends AnimationPlayer
 
-@onready var player = $".."
+@onready var player = get_parent()
+@onready var sprite = $"../Sprite2D"
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
-func _process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	update_animation()
 
-var fell_down := false
 func update_animation():
-	var dir = sign(Input.get_axis("move_left", "move_right"))
-	if fell_down && dir == 0:
-		if dir == 1:
-		#flip_h = false
-			play("crying_right")
-		elif dir == -1:
-			play("crying_left")
-		return
-			
-			#break anumation when jumping
-		
-	if player.is_on_floor() && player.forward_raycast.is_colliding():
-		if dir == 1:
-		#flip_h = false
-			play("fall_right")
-		elif dir == -1:
-			play("falling_left")
-		#flip_h = true
-		fell_down = true
+	var movement_direction = sign(player.velocity.x)
+	var input_direction = player.get_input_direction()
+	if player.is_on_floor():
+		if input_direction != 0:
+			sprite.flip_h = input_direction < 0
+	else:
+		if movement_direction != 0:
+			sprite.flip_h = movement_direction < 0
 
-		return
-	fell_down = false
-
-	if !player.is_on_floor() && player.flow_release:
+	if not player.is_on_floor() && player.flow_release:
 		play('spin')
-	elif !player.is_on_floor():
-		play('air')
-	elif dir == 0:
+	elif player.stunned:
+		if is_playing():
+			play("fall_right")
+	elif not player.is_on_floor():
+		if player.velocity.y > 0:
+			play("jump_right")
+		else:
+			play('pose_right')
+	elif input_direction == 0:
 		play("idle")
-	elif dir == 1:
-		#flip_h = false
+	elif input_direction != 0:
 		play("left")
-	elif dir == -1:
-		#flip_h = true
-		play("right")
+
+#func 

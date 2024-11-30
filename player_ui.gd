@@ -1,6 +1,6 @@
 extends CanvasLayer
-
-var total_time := 0
+# I think we can handle this by just adding delta on _process.
+var total_time:float = 0
 
 @onready var timer = $Timer
 @onready var time_display = $hud/MarginContainer/timer/VBoxContainer/time
@@ -10,7 +10,7 @@ var total_time := 0
 func _ready():
 	timer.start()
 
-func _input(event: InputEvent) -> void:
+func _process(_delta) -> void:
 	if Input.is_action_just_pressed("restart"):
 		get_tree().paused = false
 		if get_tree().current_scene.has_method('reload_level'):
@@ -20,9 +20,9 @@ func _input(event: InputEvent) -> void:
 		
 func _on_timer_timeout() -> void:
 	total_time += 1
-	var min = int(total_time / 60)
-	var sec = total_time - min * 60
-	time_display.text = '%02d:%02d' % [min,sec]
+	var minute = floor(total_time / 60.0)
+	var second = total_time - minute * 60
+	time_display.text = '%02d:%02d' % [minute,second]
 
 func report_discard_time():
 	var current = total_time
