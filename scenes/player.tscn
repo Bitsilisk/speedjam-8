@@ -506,6 +506,7 @@ metadata/_edit_lock_ = true
 script = ExtResource("2_8elxy")
 follow_mode = 2
 follow_target = NodePath("..")
+zoom = Vector2(1.6, 1.6)
 snap_to_pixel = true
 tween_resource = SubResource("Resource_5c6gw")
 tween_on_load = false
@@ -527,6 +528,5 @@ target_position = Vector2(16, 0)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_iofmc")
-animation = &"spin"
-frame_progress = 0.182747
+animation = &"falling"
 script = ExtResource("7_nqhca")

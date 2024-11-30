@@ -33,6 +33,7 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
 [node name="combo_container" type="MarginContainer" parent="hud/MarginContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20

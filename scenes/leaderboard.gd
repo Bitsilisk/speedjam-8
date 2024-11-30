@@ -115,6 +115,8 @@ func _on_player_score_request_completed(result, response_code, headers, body):
 	
 	# Print data
 	print("player_score", json.get_data())
+	if !json.get_data().has('player'):
+		return
 	player_score.set_text("Your best time is: " + str(json.get_data().score) + ' seconds')
 	set_current_name(json.get_data().player.name)
 	# Formatting as a leaderboard

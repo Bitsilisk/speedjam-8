@@ -8,9 +8,10 @@ var levels: Array = ["res://scenes/testbed.tscn", "res://scenes/testbed_2.tscn"]
 var level_instance: Node2D
 var level_idx: int = 0
 var total_time := 0
+var allowed_to_restart = false
 #level_name
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("restart"):
+	if Input.is_action_just_pressed("restart") && allowed_to_restart:
 		get_tree().paused = false
 		load_level(level_idx)
 
@@ -46,4 +47,5 @@ func level_finish():
 
 
 func _on_start_pressed() -> void:
+	allowed_to_restart = true
 	load_level(0)
