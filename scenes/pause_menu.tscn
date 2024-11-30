@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2kupenuwne5a"]
+
+[ext_resource type="Script" path="res://scenes/pause_menu.gd" id="1_5o1ba"]
+
+[node name="pause_menu" type="CanvasLayer"]
+process_mode = 3
+
+[node name="pause_menu" type="MarginContainer" parent="."]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5o1ba")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pause_menu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="resume" type="Button" parent="pause_menu/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="controls" type="Button" parent="pause_menu/VBoxContainer"]
+layout_mode = 2
+text = "Controls
+"
+
+[node name="exit" type="Button" parent="pause_menu/VBoxContainer"]
+layout_mode = 2
+text = "Exit (all progress will be lost)
+"
+
+[connection signal="pressed" from="pause_menu/VBoxContainer/resume" to="pause_menu" method="_on_resume_pressed"]
+[connection signal="pressed" from="pause_menu/VBoxContainer/controls" to="pause_menu" method="_on_controls_pressed"]
+[connection signal="pressed" from="pause_menu/VBoxContainer/exit" to="pause_menu" method="_on_exit_pressed"]
