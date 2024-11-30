@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=4 uid="uid://3jyy2ushgi0"]
+[gd_scene load_steps=14 format=4 uid="uid://3jyy2ushgi0"]
 
 [ext_resource type="Texture2D" uid="uid://bpsg5t6kxamyr" path="res://assets/Tilemap/tilemap_levels2.png" id="1_c010y"]
 [ext_resource type="Texture2D" uid="uid://dcwyewygmjxn4" path="res://assets/Tilemap/tilemap_levels3.png" id="2_dpg70"]
 [ext_resource type="PackedScene" uid="uid://domm6pbbbfsyr" path="res://scenes/player.tscn" id="2_mgii0"]
 [ext_resource type="Script" path="res://scenes/level_end.gd" id="4_04eov"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_syhr8"]
+[ext_resource type="AudioStream" uid="uid://cwktxlaw3ulih" path="res://assets/audio/music/Icy-Fun.ogg" id="6_4aku0"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_n04ni"]
 tile_data = PackedInt32Array(65536, 196609, 17, 131072, 589825, 7)
@@ -1601,5 +1602,10 @@ offset_top = -55.0
 offset_right = 357.0
 offset_bottom = 3.0
 text = "We have a bad spot here. Player stops all momemntum on this spot and cannot jump."
+
+[node name="Icy Fun" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_4aku0")
+autoplay = true
+bus = &"Music"
 
 [connection signal="body_entered" from="level_end" to="level_end" method="_on_body_entered"]

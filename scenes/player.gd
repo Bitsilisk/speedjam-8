@@ -17,6 +17,10 @@ const COYOTE_LENGTH:float = .1
 
 # Flow, increases top speed
 var flow:float = 0
+@onready var sfx_jump: AudioStreamPlayer = $sfx_jump
+@onready var sfx_wallkick: AudioStreamPlayer = $sfx_wallkick
+@onready var sfx_land: AudioStreamPlayer = $sfx_land
+
 var flow_bar
 var flow_release: bool
 
@@ -48,6 +52,7 @@ func handle_input(delta:float):
 	if is_on_coyote_floor(delta):
 		if jump_input:
 			jump()
+			sfx_jump.play()
 		else:
 			var new_direction = get_input_direction()
 			var new_velocity:float = new_direction * SPEED * delta * 1000.
@@ -59,6 +64,7 @@ func handle_input(delta:float):
 		if jump_input and forward_raycast.is_colliding():
 			velocity.x = TOP_SPEED * -sign(last_velocity.x)
 			jump()
+			sfx_wallkick.play()
 
 func apply_gravity(delta:float):
 	if not is_on_floor():
