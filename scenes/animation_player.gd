@@ -17,11 +17,13 @@ func update_animation():
 		if movement_direction != 0:
 			sprite.flip_h = movement_direction < 0
 
-	if not player.is_on_floor() && player.flow_release:
+	if not player.is_on_floor() && player.using_flow:
 		play('spin')
 	elif player.stunned:
 		if is_playing():
 			play("fall_right")
+	elif player.on_wall:
+		play("wall_hang_right")
 	elif not player.is_on_floor():
 		if player.velocity.y > 0:
 			play("jump_right")
@@ -30,6 +32,9 @@ func update_animation():
 	elif input_direction == 0:
 		play("idle")
 	elif input_direction != 0:
-		play("left")
+		if player.is_flow_speed():
+			play("spin")
+		else:
+			play("left")
 
 #func 

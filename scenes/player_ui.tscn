@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://dyxx0rqk7uwp5"]
 
 [ext_resource type="Script" path="res://player_ui.gd" id="1_in8xn"]
-[ext_resource type="Texture2D" uid="uid://w7ksjnesw8i1" path="res://assets/ui/arrow_up.png" id="2_gvou3"]
+[ext_resource type="Texture2D" path="res://assets/ui/arrow_up.png" id="2_gvou3"]
 [ext_resource type="PackedScene" uid="uid://b2kupenuwne5a" path="res://scenes/pause_menu.tscn" id="2_shlir"]
 [ext_resource type="Script" path="res://scenes/combo_container.gd" id="2_ysbhn"]
-[ext_resource type="Texture2D" uid="uid://25m70lysotvt" path="res://assets/ui/arrow_left.png" id="4_p338t"]
-[ext_resource type="Texture2D" uid="uid://b4xu4hgfiqnwy" path="res://assets/ui/arrow_right.png" id="5_bmf7v"]
-[ext_resource type="Texture2D" uid="uid://7ixm3nq41vg4" path="res://assets/ui/arrow_down.png" id="6_2xcan"]
+[ext_resource type="Texture2D" path="res://assets/ui/arrow_left.png" id="4_p338t"]
+[ext_resource type="Texture2D" path="res://assets/ui/arrow_right.png" id="5_bmf7v"]
+[ext_resource type="Texture2D" path="res://assets/ui/arrow_down.png" id="6_2xcan"]
 
 [node name="player_ui" type="CanvasLayer" groups=["player_ui"]]
 layer = 2
