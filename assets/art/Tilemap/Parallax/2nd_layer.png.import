@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://w7ksjnesw8i1"
-path="res://.godot/imported/arrow_up.png-a6a68929c6c2143a10f56161045087a8.ctex"
+uid="uid://gpvibk1sokii"
+path="res://.godot/imported/2nd_layer.png-203bb099a50622540a00ee598c75e152.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/arrow_up.png"
-dest_files=["res://.godot/imported/arrow_up.png-a6a68929c6c2143a10f56161045087a8.ctex"]
+source_file="res://assets/art/Tilemap/Parallax/2nd_layer.png"
+dest_files=["res://.godot/imported/2nd_layer.png-203bb099a50622540a00ee598c75e152.ctex"]
 
 [params]
 

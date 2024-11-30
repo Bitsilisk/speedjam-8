@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dglejhf4sw48h"
-path="res://.godot/imported/wall_skirts1.png-08a45da9bf57093e8779d66ec8c8a7f7.ctex"
+uid="uid://djggj1b7tl4j3"
+path="res://.godot/imported/ui_buttons.png-963a28e951c50d613dd7b3d40f3cfa84.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/vfx/wall_skirts1.png"
-dest_files=["res://.godot/imported/wall_skirts1.png-08a45da9bf57093e8779d66ec8c8a7f7.ctex"]
+source_file="res://assets/art/ui/ui_buttons.png"
+dest_files=["res://.godot/imported/ui_buttons.png-963a28e951c50d613dd7b3d40f3cfa84.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6htffp1nkn1l"
-path="res://.godot/imported/rainbow_vfx.png-74f7117e03f0019949b8880a2c8d7712.ctex"
+uid="uid://dglejhf4sw48h"
+path="res://.godot/imported/wall_skirts1.png-375c6bb7a7aefb30b1212d70c591d101.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/vfx/rainbow_vfx.png"
-dest_files=["res://.godot/imported/rainbow_vfx.png-74f7117e03f0019949b8880a2c8d7712.ctex"]
+source_file="res://assets/art/vfx/wall_skirts1.png"
+dest_files=["res://.godot/imported/wall_skirts1.png-375c6bb7a7aefb30b1212d70c591d101.ctex"]
 
 [params]
 
