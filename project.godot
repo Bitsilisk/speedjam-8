@@ -33,7 +33,8 @@ enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addon
 [file_customization]
 
 folder_colors={
-"res://assets/": "blue"
+"res://assets/": "blue",
+"res://assets/audio/": "pink"
 }
 
 [global_group]
