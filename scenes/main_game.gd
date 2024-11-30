@@ -2,6 +2,7 @@ extends Control
 
 @onready var main2d: Node2D = $main_2d
 @onready var main_menu = $main_menu
+@onready var leaderboard = $main_menu/HBoxContainer/leaderboard
 
 var level_instance: Node2D
 var level_name: String
@@ -34,6 +35,9 @@ func level_finish():
 	).report_discard_time()
 	print('total_time ', total_time)
 	print('next level')
+	unload_level()
+	leaderboard.load_new_info(total_time)
+	main_menu.show()
 	#record the time for the current level
 	#if level_last?
 	#show player the time and ask if he wants to upload it	

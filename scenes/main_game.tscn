@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bx3n8pi2plujw"]
+[gd_scene load_steps=3 format=3 uid="uid://bx3n8pi2plujw"]
 
 [ext_resource type="Script" path="res://scenes/main_game.gd" id="1_i4yg0"]
+[ext_resource type="Script" path="res://scenes/leaderboard.gd" id="2_gq2q6"]
 
 [node name="MainGame" type="Control"]
 process_mode = 3
@@ -26,6 +27,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="main_menu"]
 layout_mode = 2
+theme_override_constants/separation = 100
 
 [node name="VBoxContainer" type="VBoxContainer" parent="main_menu/HBoxContainer"]
 layout_mode = 2
@@ -41,6 +43,29 @@ text = "Choose Level"
 [node name="credits" type="Button" parent="main_menu/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Credits"
+
+[node name="leaderboard" type="VBoxContainer" parent="main_menu/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+script = ExtResource("2_gq2q6")
+
+[node name="all_score" type="Label" parent="main_menu/HBoxContainer/leaderboard"]
+layout_mode = 2
+text = "Smth"
+
+[node name="player_score" type="Label" parent="main_menu/HBoxContainer/leaderboard"]
+layout_mode = 2
+text = "Smth"
+
+[node name="current_name" type="Label" parent="main_menu/HBoxContainer/leaderboard"]
+layout_mode = 2
+text = "Your name: "
+
+[node name="name_enter" type="LineEdit" parent="main_menu/HBoxContainer/leaderboard"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+placeholder_text = "Enter your name"
+max_length = 20
 
 [node name="main_2d" type="Node2D" parent="."]
 process_mode = 1
