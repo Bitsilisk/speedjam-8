@@ -53,3 +53,4 @@ func _physics_process(delta):
 
 func get_direction() -> int:
 	return sign(Input.get_axis("move_left", "move_right"))
+	

@@ -28,7 +28,13 @@ window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "blue"
+}
 
 [global_group]
 
