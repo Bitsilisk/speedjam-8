@@ -103,7 +103,8 @@ text = "Coding- Caaz, ArturGin"
 layout_mode = 2
 text = "Sfx & Music- Joe"
 
-[node name="leaderboard" type="Control" parent="."]
+[node name="leaderboard_container" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -111,7 +112,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="leaderboard"]
+[node name="ColorRect" type="ColorRect" parent="leaderboard_container"]
 layout_mode = 0
 offset_left = 25.0
 offset_top = 25.0
@@ -119,7 +120,7 @@ offset_right = 618.0
 offset_bottom = 338.0
 color = Color(0.109804, 0.109804, 0.109804, 0.956863)
 
-[node name="MarginContainer" type="MarginContainer" parent="leaderboard"]
+[node name="MarginContainer" type="MarginContainer" parent="leaderboard_container"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,26 +132,40 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="leaderboard" type="VBoxContainer" parent="leaderboard/MarginContainer"]
+[node name="leaderboard" type="VBoxContainer" parent="leaderboard_container/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 script = ExtResource("2_aedt5")
 
-[node name="all_score" type="Label" parent="leaderboard/MarginContainer/leaderboard"]
+[node name="all_score" type="Label" parent="leaderboard_container/MarginContainer/leaderboard"]
 layout_mode = 2
 text = "Loading leaderboard"
 
-[node name="player_score" type="Label" parent="leaderboard/MarginContainer/leaderboard"]
+[node name="player_score" type="Label" parent="leaderboard_container/MarginContainer/leaderboard"]
 layout_mode = 2
 text = "Loading your score"
 
-[node name="name_enter" type="LineEdit" parent="leaderboard/MarginContainer/leaderboard"]
+[node name="name_enter" type="LineEdit" parent="leaderboard_container/MarginContainer/leaderboard"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 placeholder_text = "Enter your name"
 max_length = 20
 
-[node name="close" type="Button" parent="leaderboard/MarginContainer/leaderboard"]
+[node name="HBoxContainer" type="HBoxContainer" parent="leaderboard_container/MarginContainer/leaderboard"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="prev_page" type="Button" parent="leaderboard_container/MarginContainer/leaderboard/HBoxContainer"]
+layout_mode = 2
+text = "prev_page"
+
+[node name="next_page" type="Button" parent="leaderboard_container/MarginContainer/leaderboard/HBoxContainer"]
+layout_mode = 2
+text = "next_page
+"
+
+[node name="close" type="Button" parent="leaderboard_container/MarginContainer/leaderboard"]
 layout_mode = 2
 text = "close"
 
@@ -159,4 +174,6 @@ text = "close"
 [connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer/credits" to="." method="_on_credits_pressed"]
 [connection signal="toggled" from="CenterContainer/HBoxContainer/VBoxContainer/credits" to="." method="_on_credits_toggled"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer/leaderboard" to="." method="_on_leaderboard_pressed"]
-[connection signal="pressed" from="leaderboard/MarginContainer/leaderboard/close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="leaderboard_container/MarginContainer/leaderboard/HBoxContainer/prev_page" to="leaderboard_container/MarginContainer/leaderboard" method="_on_prev_page_pressed"]
+[connection signal="pressed" from="leaderboard_container/MarginContainer/leaderboard/HBoxContainer/next_page" to="leaderboard_container/MarginContainer/leaderboard" method="_on_next_page_pressed"]
+[connection signal="pressed" from="leaderboard_container/MarginContainer/leaderboard/close" to="." method="_on_close_pressed"]
