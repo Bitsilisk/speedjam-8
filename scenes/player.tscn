@@ -423,7 +423,7 @@ stream = ExtResource("12_bk7sx")
 
 [node name="sfx_splat" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_vkwcc")
-volume_db = -2.0
+volume_db = -10.0
 bus = &"SFX"
 
 [node name="DashParticles" type="GPUParticles2D" parent="."]
