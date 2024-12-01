@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=4 uid="uid://3jyy2ushgi0"]
 
 [ext_resource type="Texture2D" uid="uid://bpsg5t6kxamyr" path="res://assets/art/Tilemap/tilemap_levels2.png" id="1_c010y"]
-[ext_resource type="Texture2D" uid="uid://ceinc3yxgseky" path="res://assets/art/Tilemap/Parallax/1st_layer.png" id="1_qvh5d"]
+[ext_resource type="Texture2D" uid="uid://4eg1b615lbki" path="res://assets/art/Tilemap/Parallax/1st_layer.png" id="1_qvh5d"]
 [ext_resource type="Texture2D" uid="uid://dcwyewygmjxn4" path="res://assets/art/Tilemap/tilemap_levels3.png" id="2_dpg70"]
 [ext_resource type="Texture2D" uid="uid://gpvibk1sokii" path="res://assets/art/Tilemap/Parallax/2nd_layer.png" id="2_fwqef"]
 [ext_resource type="PackedScene" uid="uid://domm6pbbbfsyr" path="res://scenes/player.tscn" id="2_mgii0"]

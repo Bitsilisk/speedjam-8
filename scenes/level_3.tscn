@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bpsg5t6kxamyr" path="res://assets/art/Tilemap/tilemap_levels2.png" id="1_qv3n6"]
 [ext_resource type="Texture2D" uid="uid://dcwyewygmjxn4" path="res://assets/art/Tilemap/tilemap_levels3.png" id="2_4mp7o"]
 [ext_resource type="Texture2D" uid="uid://gpvibk1sokii" path="res://assets/art/Tilemap/Parallax/2nd_layer.png" id="3_k4arh"]
-[ext_resource type="Texture2D" uid="uid://ceinc3yxgseky" path="res://assets/art/Tilemap/Parallax/1st_layer.png" id="3_myjh7"]
+[ext_resource type="Texture2D" uid="uid://4eg1b615lbki" path="res://assets/art/Tilemap/Parallax/1st_layer.png" id="3_myjh7"]
 [ext_resource type="Texture2D" uid="uid://cqt5hekt5ga51" path="res://assets/art/Tilemap/Parallax/3rd_layer.png" id="4_hmitt"]
 [ext_resource type="PackedScene" uid="uid://domm6pbbbfsyr" path="res://scenes/player.tscn" id="5_vpg1e"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="6_2gsiv"]

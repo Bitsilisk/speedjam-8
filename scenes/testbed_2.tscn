@@ -1,11 +1,11 @@
 [gd_scene load_steps=27 format=4 uid="uid://c35p46nb6m26w"]
 
 [ext_resource type="Texture2D" uid="uid://bpsg5t6kxamyr" path="res://assets/art/Tilemap/tilemap_levels2.png" id="1_x57sf"]
+[ext_resource type="Texture2D" uid="uid://4eg1b615lbki" path="res://assets/art/Tilemap/Parallax/1st_layer.png" id="1_y46eg"]
 [ext_resource type="Texture2D" uid="uid://dcwyewygmjxn4" path="res://assets/art/Tilemap/tilemap_levels3.png" id="2_cww44"]
 [ext_resource type="PackedScene" uid="uid://domm6pbbbfsyr" path="res://scenes/player.tscn" id="3_oi42w"]
 [ext_resource type="Texture2D" uid="uid://btlc4o0enf0kb" path="res://assets/art/Tilemap/end_flag.png" id="6_s4wqf"]
 [ext_resource type="Script" path="res://scripts/tutorial_follow_text.gd" id="6_vr8sl"]
-[ext_resource type="Texture2D" uid="uid://ceinc3yxgseky" path="res://assets/art/Tilemap/Parallax/1st_layer.png" id="7_x6ugl"]
 [ext_resource type="Script" path="res://scripts/level_end.gd" id="8_kfqqn"]
 [ext_resource type="Texture2D" uid="uid://gpvibk1sokii" path="res://assets/art/Tilemap/Parallax/2nd_layer.png" id="8_m00cu"]
 [ext_resource type="Texture2D" uid="uid://cqt5hekt5ga51" path="res://assets/art/Tilemap/Parallax/3rd_layer.png" id="9_53yqn"]
@@ -761,7 +761,7 @@ repeat_times = 3
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(-1126, -12)
-texture = ExtResource("7_x6ugl")
+texture = ExtResource("1_y46eg")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 640, 360)
@@ -780,7 +780,7 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "C:/Asesprite/Projects/speedjam/background/1st_layer.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "9895bcdecf8d8f83757d98990097d05f"
+metadata/_aseprite_wizard_source_file_hash_ = "7ffc822baa1cff03d52843b437d7c286"
 
 [node name="blue_ice" type="Parallax2D" parent="parallax"]
 scroll_scale = Vector2(0.5, 0.5)
