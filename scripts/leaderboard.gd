@@ -12,6 +12,7 @@ var player_id: String
 # HTTP Request node can only handle one call per node
 var auth_http = HTTPRequest.new()
 var leaderboard_http = HTTPRequest.new()
+var leaderboards_json: JSON
 var submit_score_http = HTTPRequest.new()
 var score_http #= HTTPRequest.new()
 
@@ -119,7 +120,7 @@ func _on_player_score_request_completed(result, response_code, headers, body):
 	print("player_score", json.get_data())
 	if !json.get_data().has('player'):
 		return
-	player_score.set_text(current_name + ": " + str(json.get_data().score) + ' seconds')
+	player_score.set_text(str(current_name) + ": " + str(json.get_data().score) + ' seconds')
 	set_current_name(json.get_data().player.name)
 	# Formatting as a leaderboard
 	#var leaderboardFormatted = ""
@@ -152,7 +153,7 @@ func _on_leaderboard_request_completed(result, response_code, headers, body):
 	
 	# Formatting as a leaderboard
 	#var leaderboardFormatted = ""
-	paginate_response(json)
+#	paginate_response(json)
 	#get_page(0)
 	#for n in json.get_data().items.size():
 		#leaderboardFormatted += str(json.get_data().items[n].rank)+str(". ")
@@ -166,28 +167,35 @@ func _on_leaderboard_request_completed(result, response_code, headers, body):
 		#leaderboardFormatted += id_or_name+str(" - ")
 		#leaderboardFormatted += str(json.get_data().items[n].score)+' sec'+str("\n")
 	# Print the formatted leaderboard to the console
-	all_score.set_text(pages[current_page])
+	leaderboards_json = json
+	all_score.set_text(paginate_response(0))
 	
 	# Clear node
 	leaderboard_http.queue_free()
 
-var pages = []
-func paginate_response(json: JSON):
-	for _i in range(5):
-		var leaderboardFormatted = ""
-		for n in json.get_data().items.size():
-			leaderboardFormatted += str(json.get_data().items[n].rank)+str(". ")
-			var player_name = str(json.get_data().items[n].player.name)
-			var id = str(json.get_data().items[n].player.id)
-			var id_or_name
-			if player_name == "":
-				id_or_name = id
-			else:
-				id_or_name = player_name
-			leaderboardFormatted += id_or_name+str(" - ")
-			leaderboardFormatted += str(json.get_data().items[n].score)+' sec'+str("\n")
-		pages.append(leaderboardFormatted)
+func paginate_response(idx: int):
+	var json = leaderboards_json
+	var leaderboardFormatted = ""
+	var end
+	if idx == 0:
+		end = 4
+	else:
+		idx = idx + 5
+		end = idx + 5
 
+	for item in json.get_data().items.slice(idx, end):
+		leaderboardFormatted += str(item.rank)+str(". ")
+		var player_name = str(item.player.name)
+		var id = str(item.player.id)
+		var id_or_name
+		if player_name == "":
+			id_or_name = id
+		else:
+			id_or_name = player_name
+		leaderboardFormatted += id_or_name+str(" - ")
+		leaderboardFormatted += str(item.score)+' sec'+str("\n")
+	print("leaderboardFormatted ",leaderboardFormatted)
+	return leaderboardFormatted
 #func get_page(idx):
 	
 func _upload_score(score: int):
@@ -266,9 +274,9 @@ func _on_upload_score_request_completed(result, response_code, headers, body) :
 
 func _on_next_page_pressed() -> void:
 	current_page += 1
-	all_score.set_text(pages[current_page])
+	all_score.set_text(paginate_response(current_page))
 
 
 func _on_prev_page_pressed() -> void:
 	current_page -= 1
-	all_score.set_text(pages[current_page])
+	all_score.set_text(paginate_response(current_page))
