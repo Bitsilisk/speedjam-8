@@ -829,7 +829,7 @@ metadata/_aseprite_wizard_source_file_hash_ = "3685732c42826442be4d9c017d818e2b"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(-246.6, 68.4)
+position = Vector2(-411, 114)
 metadata/_edit_lock_ = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
