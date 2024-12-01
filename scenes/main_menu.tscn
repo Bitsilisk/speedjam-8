@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cbvah23wyy74o" path="res://scenes/level_4.tscn" id="4_4q5pf"]
 [ext_resource type="PackedScene" uid="uid://btub3thp8g6v6" path="res://scenes/level_5.tscn" id="5_cwl87"]
 [ext_resource type="PackedScene" uid="uid://dsh6f6l25tv24" path="res://scenes/level_3.tscn" id="5_qkove"]
-[ext_resource type="StyleBox" uid="uid://dtbi1sq0ahxe" path="res://assets/art/ui/pink_button_style.tres" id="7_2blsd"]
+[ext_resource type="StyleBox" path="res://assets/art/ui/pink_button_style.tres" id="7_2blsd"]
 [ext_resource type="AudioStream" uid="uid://bkjkh7ww45pe1" path="res://assets/audio/music/Icy-Title.ogg" id="7_7rkhp"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("level_choices") groups=["level_loader"]]

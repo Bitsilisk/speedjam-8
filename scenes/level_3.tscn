@@ -876,7 +876,7 @@ process_physics_priority = 300
 script = ExtResource("6_2gsiv")
 
 [node name="level_end" type="Area2D" parent="."]
-position = Vector2(-880, 56)
+position = Vector2(-880, 58)
 collision_layer = 4
 script = ExtResource("7_bvkai")
 metadata/_edit_group_ = true
