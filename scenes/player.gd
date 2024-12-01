@@ -15,9 +15,12 @@ const FLOW_DECAY_RATE = 1
 @onready var forward_raycast:RayCast2D = $RayCast2D
 @onready var player_ui = $player_ui
 @onready var heart_particales = $GPUParticles2D
+
+#Audio Onreadies
 @onready var sfx_jump: AudioStreamPlayer = $sfx_jump
 @onready var sfx_wallkick: AudioStreamPlayer = $sfx_wallkick
 @onready var sfx_land: AudioStreamPlayer = $sfx_land
+@onready var sfx_splat: AudioStreamPlayer = $sfx_splat
 
 # Flow, increases top speed
 var flow:float = 0
@@ -87,6 +90,7 @@ func check_stun():
 	if movement_direction == 0:
 		var on_floor:bool = is_on_floor()
 		if abs(last_velocity.x) >= TOP_SPEED-SLAM_SENSITIVITY and on_floor:
+			sfx_splat.play()
 			stunned = true
 			on_wall = false
 		elif not on_floor:
