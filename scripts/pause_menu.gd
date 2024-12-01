@@ -14,10 +14,6 @@ func _on_resume_pressed() -> void:
 	pause_menu()
 
 
-func _on_controls_pressed() -> void:
-	pass # Replace with function body.
-
-
 func _on_exit_pressed() -> void:
 	pause_menu()
 	get_tree().reload_current_scene()
@@ -27,3 +23,7 @@ func pause_menu():
 	get_tree().paused = paused
 	self.visible = paused
 	#self.show()
+
+
+func _on_debug_las_level_pressed() -> void:
+	pass # Replace with function body.

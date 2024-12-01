@@ -6,12 +6,14 @@ extends Control
 @export var game_node:Node2D
 @onready var leaderboard = $leaderboard_container
 var current_level
-@onready var leaderboard_logic = $leaderboard/MarginContainer/leaderboard
+@onready var leaderboard_logic = $leaderboard_container/MarginContainer/leaderboard
 var levels_played := []
-var total_time: int
+var total_time_all_levels: int
 
 @onready var icy_title: AudioStreamPlayer = $"Icy Title"
-
+@onready var between_levels_screen = $between_levels
+@onready var end_screen = $end_screen
+@onready var total_time_text = $end_screen/CenterContainer/VBoxContainer/total_time
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,8 +35,7 @@ func load_level(index:int) -> void:
 	if not is_instance_valid(game_node):
 		return
 	
-	for child in game_node.get_children():
-		child.call_deferred('free')
+	unload_level()
 	await get_tree().create_timer(0.01).timeout 
 
 	var level = levels[index].instantiate()
@@ -42,8 +43,9 @@ func load_level(index:int) -> void:
 	game_node.add_child(level)
 	hide()
 
-func _process(delta: float) -> void:
-	pass
+func unload_level():
+	for child in game_node.get_children():
+		child.call_deferred('free')
 
 func _on_start_pressed() -> void:
 	load_level(0)
@@ -57,12 +59,19 @@ func reload_level():
 	load_level(current_level)
 
 func load_next_level():
-	if levels.size() == current_level && played_all_levels():
-		leaderboard_logic.load_new_info(total_time)
+	show()
+	$CenterContainer.hide()
+	levels_played.append(current_level)
+	if levels.size() == (current_level + 1) && played_all_levels():
+		unload_level()
+		total_time_text.text = "Your total time: " + str(total_time_all_levels)
+		end_screen.show()
 	else:
-		# caaz, need to add to total time here
-		levels_played.append(current_level)
-		load_level(current_level + 1)
+		total_time_all_levels += get_tree().get_first_node_in_group("player_ui"
+			).total_time
+		unload_level()
+		between_levels_screen.show()
+		#load_level(current_level + 1)
 
 func _on_leaderboard_pressed() -> void:
 	leaderboard.show()
@@ -75,4 +84,14 @@ func _on_credits_toggled(toggled_on: bool) -> void:
 	credits.visible = toggled_on
 
 func played_all_levels():
-	levels_played.size() == levels.size()
+	return levels_played.size() == levels.size()
+
+func _on_again_pressed() -> void:
+	reload_level()
+	
+func _on_next_level_pressed() -> void:
+	load_level(current_level + 1)
+
+
+func _on_submit_time_pressed() -> void:
+	leaderboard_logic.load_new_info(total_time_all_levels)
