@@ -16,7 +16,8 @@ const FLOW_DECAY_RATE = 1
 @onready var forward_raycast:RayCast2D = $RayCast2D
 @onready var player_ui = $player_ui
 @onready var heart_particales = $GPUParticles2D
-
+@onready var dash_particles = $DashParticles
+@onready var fast_fall_particles = $FastFallParticles
 #Audio Onreadies
 @onready var sfx_jump: AudioStreamPlayer = $sfx_jump
 @onready var sfx_wallkick: AudioStreamPlayer = $sfx_wallkick
@@ -61,10 +62,14 @@ func handle_input(delta:float):
 	else:
 		if using_flow:
 			apply_horizontal_movement(delta, 2)
+			
 		if jump_input and forward_raycast.is_colliding():
 			velocity.x = get_top_speed() * -sign(last_velocity.x)
 			jump()
 			sfx_wallkick.play()
+		if Input.is_action_just_pressed("fast_fall"):
+			velocity.y += JUMP_SPEED
+			fast_fall_particles.emitting = true
 			
 	if Input.is_action_pressed("use_flow") and not is_zero_approx(player_ui.flow_bar.value) and not is_on_floor():
 		flow += FLOW_BUILD_RATE
@@ -112,6 +117,7 @@ func dash():
 #	I aint dealing with that issue again.
 	if not player_ui.flow_bar.value == 100:
 		return
+	dash_particles.emitting = true
 	velocity.x = DASH_SPEED * sign(last_velocity.x)
 	velocity.y = 0
 	player_ui.flow_bar.value = 0
