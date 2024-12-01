@@ -739,7 +739,7 @@ position = Vector2(-612, 11)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(-459, 8.25)
+position = Vector2(-612, 11)
 metadata/_edit_lock_ = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -761,7 +761,7 @@ texture_filter = 1
 position = Vector2(16, 38)
 sprite_frames = SubResource("SpriteFrames_hmmmq")
 animation = &"idle"
-frame_progress = 0.311176
+frame_progress = 0.693305
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
 }
