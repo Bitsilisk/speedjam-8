@@ -3,7 +3,7 @@ extends CharacterBody2D
 const SLAM_SENSITIVITY:float = 10
 const TOP_SPEED:float = 200
 const TOP_FLOW_SPEED:float = 400
-const SPEED:float = .1
+const SPEED:float = .2
 const JUMP_SPEED:float = 300
 const DASH_SPEED:float = 500
 const WALL_DISTANCE:int = 16
