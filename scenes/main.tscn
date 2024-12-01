@@ -1,11 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://dejhsital8kuo"]
+[gd_scene load_steps=16 format=3 uid="uid://dejhsital8kuo"]
 
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_3ufg0"]
 [ext_resource type="PackedScene" uid="uid://c2f75ss4k6uba" path="res://scenes/music_manager.tscn" id="1_300cy"]
-[ext_resource type="PackedScene" uid="uid://bh3my8ljgw02s" path="res://scenes/leaderboard.tscn" id="2_em8um"]
+[ext_resource type="PackedScene" uid="uid://c35p46nb6m26w" path="res://scenes/levels/level_1_tutorial.tscn" id="2_uv5s6"]
 [ext_resource type="PackedScene" uid="uid://bdldxaka32a6w" path="res://scenes/main_menu.tscn" id="2_wl0pp"]
 [ext_resource type="AudioStream" uid="uid://c8eextcdp3dbw" path="res://assets/audio/sfx/icy_uihoverA.wav" id="3_2iioh"]
+[ext_resource type="PackedScene" uid="uid://3jyy2ushgi0" path="res://scenes/levels/testbed.tscn" id="3_kdc1k"]
+[ext_resource type="PackedScene" uid="uid://dsh6f6l25tv24" path="res://scenes/levels/level_3.tscn" id="4_mbm5s"]
 [ext_resource type="AudioStream" uid="uid://dk6xyuqw5w0d4" path="res://assets/audio/sfx/icy_uihoverC#.wav" id="4_pyh1i"]
 [ext_resource type="AudioStream" uid="uid://dekfm2fa46s8r" path="res://assets/audio/sfx/icy_uihoverD.wav" id="5_yb8db"]
+[ext_resource type="PackedScene" uid="uid://cbvah23wyy74o" path="res://scenes/levels/level_4.tscn" id="5_ylr2j"]
+[ext_resource type="PackedScene" uid="uid://btub3thp8g6v6" path="res://scenes/levels/level_5.tscn" id="6_edjsb"]
 [ext_resource type="AudioStream" uid="uid://d4eeh8808l5yo" path="res://assets/audio/sfx/icy_uihoverF#.wav" id="6_i4lgk"]
 [ext_resource type="AudioStream" uid="uid://bic1r6kiobaqo" path="res://assets/audio/sfx/icy_uihoverG.wav" id="7_ddyam"]
 [ext_resource type="AudioStream" uid="uid://bja6thudab6hb" path="res://assets/audio/sfx/icy_uiclick.wav" id="8_a8cvk"]
@@ -20,7 +25,7 @@ stream_3/stream = ExtResource("6_i4lgk")
 stream_4/stream = ExtResource("7_ddyam")
 stream_4/weight = 0.25
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" node_paths=PackedStringArray("game_node", "main_menu")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -28,20 +33,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_3ufg0")
+levels = Array[PackedScene]([ExtResource("2_uv5s6"), ExtResource("3_kdc1k"), ExtResource("4_mbm5s"), ExtResource("5_ylr2j"), ExtResource("6_edjsb")])
+game_node = NodePath("Game")
+main_menu = NodePath("MainMenu")
 
 [node name="MusicManager" parent="." instance=ExtResource("1_300cy")]
 unique_name_in_owner = true
 
-[node name="MainMenu" parent="." node_paths=PackedStringArray("leaderboard", "game_node") instance=ExtResource("2_wl0pp")]
+[node name="MainMenu" parent="." node_paths=PackedStringArray("game_node") instance=ExtResource("2_wl0pp")]
 layout_mode = 1
-leaderboard = NodePath("../LeaderboardContainer")
 game_node = NodePath("../Game")
 
-[node name="LeaderboardContainer" parent="." instance=ExtResource("2_em8um")]
-layout_mode = 0
-
 [node name="Game" type="Node2D" parent="."]
-process_mode = 1
 
 [node name="sfx_uihover" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_sm0iu")
@@ -50,3 +54,5 @@ bus = &"SFX"
 [node name="sfx_uiclick" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_a8cvk")
 bus = &"SFX"
+
+[connection signal="visibility_changed" from="MainMenu" to="MainMenu" method="_on_visibility_changed"]

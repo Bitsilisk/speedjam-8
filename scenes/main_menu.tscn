@@ -1,15 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdldxaka32a6w"]
+[gd_scene load_steps=4 format=3 uid="uid://bdldxaka32a6w"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_427ti"]
-[ext_resource type="PackedScene" uid="uid://c35p46nb6m26w" path="res://scenes/levels/testbed_2.tscn" id="2_tcuku"]
 [ext_resource type="Texture2D" uid="uid://iwa2fq84sdrv" path="res://assets/art/Tilemap/title_screen.png" id="3_ahafd"]
-[ext_resource type="PackedScene" uid="uid://3jyy2ushgi0" path="res://scenes/levels/testbed.tscn" id="3_f54ws"]
-[ext_resource type="PackedScene" uid="uid://cbvah23wyy74o" path="res://scenes/levels/level_4.tscn" id="4_4q5pf"]
-[ext_resource type="PackedScene" uid="uid://btub3thp8g6v6" path="res://scenes/levels/level_5.tscn" id="5_cwl87"]
-[ext_resource type="PackedScene" uid="uid://dsh6f6l25tv24" path="res://scenes/levels/level_3.tscn" id="5_qkove"]
 [ext_resource type="StyleBox" uid="uid://dtbi1sq0ahxe" path="res://assets/art/ui/pink_button_style.tres" id="7_2blsd"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("level_choices", "credits", "leaderboard") groups=["level_loader"]]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("level_choices", "credits") groups=["level_loader"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,10 +12,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_427ti")
-levels = Array[PackedScene]([ExtResource("2_tcuku"), ExtResource("3_f54ws"), ExtResource("5_qkove"), ExtResource("4_4q5pf"), ExtResource("5_cwl87")])
 level_choices = NodePath("MarginContainer/HBoxContainer/LevelChoices")
 credits = NodePath("MarginContainer/HBoxContainer/Credits")
-leaderboard = NodePath("")
 
 [node name="Background" type="TextureRect" parent="."]
 texture_filter = 1
@@ -112,50 +105,6 @@ SFX & Music - Joe"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="between_levels" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="between_levels"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="HBoxContainer" type="HBoxContainer" parent="between_levels/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="level_time" type="Label" parent="between_levels/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "Level Time - "
-
-[node name="again" type="Button" parent="between_levels/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(115, 25)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = ExtResource("7_2blsd")
-text = "Again!"
-
-[node name="next_level" type="Button" parent="between_levels/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(140, 25)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = ExtResource("7_2blsd")
-text = "Next one"
-
 [node name="end_screen" type="Control" parent="."]
 visible = false
 layout_mode = 1
@@ -206,6 +155,4 @@ horizontal_alignment = 1
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/credits" to="." method="_on_credits_pressed"]
 [connection signal="toggled" from="MarginContainer/HBoxContainer/VBoxContainer/credits" to="." method="_on_credits_toggled"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/leaderboard" to="." method="_on_leaderboard_pressed"]
-[connection signal="pressed" from="between_levels/MarginContainer/HBoxContainer/again" to="." method="_on_again_pressed"]
-[connection signal="pressed" from="between_levels/MarginContainer/HBoxContainer/next_level" to="." method="_on_next_level_pressed"]
 [connection signal="pressed" from="end_screen/CenterContainer/VBoxContainer/submit_time" to="." method="_on_submit_time_pressed"]

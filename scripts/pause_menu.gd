@@ -1,29 +1,18 @@
-extends MarginContainer
+extends Control
+@onready var main = get_node("/root/Main")
 
+func _on_visibility_changed():
+	var tree:SceneTree = get_tree()
+	if not is_instance_valid(tree):
+		return
+	tree.paused = visible
 
-var paused := false
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	self.hide()
+	
+func _on_resume_pressed():
+	print("RESUME?")
+	hide()
 
-func _process(_delta:float) -> void:
-	if Input.is_action_just_pressed("escape"):
-		pause_menu()
-
-func _on_resume_pressed() -> void:
-	pause_menu()
-
-
-func _on_exit_pressed() -> void:
-	pause_menu()
-	get_tree().reload_current_scene()
-
-func pause_menu():
-	paused = !paused
-	get_tree().paused = paused
-	self.visible = paused
-	#self.show()
-
-
-func _on_debug_las_level_pressed() -> void:
-	pass # Replace with function body.
+func _on_exit_pressed():
+	print("EXIT?")
+	hide()
+	main.show_main_menu()

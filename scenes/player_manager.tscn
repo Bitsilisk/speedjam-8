@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=3 uid="uid://coh4q5cpuht56"]
+
+[ext_resource type="Script" path="res://scripts/player_manager.gd" id="1_6n8fn"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="1_b3a2u"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_80rqs"]
+[ext_resource type="PackedScene" uid="uid://domm6pbbbfsyr" path="res://scenes/player.tscn" id="3_ahntl"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_75cov"]
+[ext_resource type="PackedScene" uid="uid://b2kupenuwne5a" path="res://scenes/pause_menu.tscn" id="5_dq1vk"]
+[ext_resource type="PackedScene" uid="uid://dyxx0rqk7uwp5" path="res://scenes/player_ui.tscn" id="5_sf40c"]
+
+[sub_resource type="Resource" id="Resource_spm7p"]
+script = ExtResource("2_80rqs")
+duration = 1.0
+transition = 0
+ease = 2
+
+[node name="PlayerManager" type="Node2D" node_paths=PackedStringArray("phantom_camera", "camera", "pause_menu")]
+script = ExtResource("1_6n8fn")
+PlayerScene = ExtResource("3_ahntl")
+phantom_camera = NodePath("PhantomCamera2D")
+camera = NodePath("Camera2D")
+pause_menu = NodePath("HUDLayer/PauseMenu")
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+script = ExtResource("1_b3a2u")
+follow_mode = 2
+tween_resource = SubResource("Resource_spm7p")
+tween_on_load = false
+follow_damping = true
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("4_75cov")
+
+[node name="HUDLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="HUDLayer" instance=ExtResource("5_dq1vk")]
+visible = false
+
+[node name="PlayerHud" parent="HUDLayer" instance=ExtResource("5_sf40c")]
