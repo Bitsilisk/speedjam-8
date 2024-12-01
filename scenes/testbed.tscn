@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://3jyy2ushgi0"]
+[gd_scene load_steps=15 format=4 uid="uid://3jyy2ushgi0"]
 
 [ext_resource type="Texture2D" uid="uid://bpsg5t6kxamyr" path="res://assets/art/Tilemap/tilemap_levels2.png" id="1_c010y"]
 [ext_resource type="Texture2D" uid="uid://b8rykpel0y8vy" path="res://assets/art/Tilemap/Parallax/1st_layer.png" id="1_qvh5d"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cqt5hekt5ga51" path="res://assets/art/Tilemap/Parallax/3rd_layer.png" id="3_c5gba"]
 [ext_resource type="Script" path="res://scenes/level_end.gd" id="4_04eov"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_syhr8"]
+[ext_resource type="AudioStream" uid="uid://cwktxlaw3ulih" path="res://assets/audio/music/Icy-Fun.ogg" id="9_8173o"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_n04ni"]
 tile_data = PackedInt32Array(65536, 196609, 17, 131072, 589825, 7)
@@ -793,5 +794,10 @@ offset_top = -259.0
 offset_right = -1362.0
 offset_bottom = -236.0
 text = "#Need to implement this to stay attacked the player?"
+
+[node name="Icy Fun" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_8173o")
+autoplay = true
+bus = &"Music"
 
 [connection signal="body_entered" from="level_end" to="level_end" method="_on_body_entered"]
