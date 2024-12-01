@@ -51,9 +51,11 @@ func reload_level():
 	await get_tree().create_timer(0.01).timeout 
 	var level = levels[current_level].instantiate()
 	game_node.add_child(level)
-	#load_level(current_level)
 
 func load_next_level():
+	#if levels.size() == index:
+		#upload it
+	#else:	
 	load_level(current_level + 1)
 
 func _on_leaderboard_pressed() -> void:
