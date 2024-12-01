@@ -5,10 +5,14 @@ extends Control
 @onready var credits: Control = $CenterContainer/HBoxContainer/credits
 @export var game_node:Node2D
 @onready var leaderboard = $leaderboard
+
+@onready var icy_title: AudioStreamPlayer = $"Icy Title"
+
 var current_level
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	icy_title.play()
 	for level in range(levels.size()):
 		var button = Button.new()
 		button.text = "Level {0}".format([level+1])
@@ -39,6 +43,7 @@ func _process(delta: float) -> void:
 
 func _on_start_pressed() -> void:
 	load_level(0)
+	icy_title.stop()
 
 
 func _on_choose_level_toggled(toggled_on: bool) -> void:
