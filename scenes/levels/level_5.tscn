@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://btlc4o0enf0kb" path="res://assets/art/Tilemap/end_flag.png" id="8_ch3ba"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xcf0k"]
+load_path = "res://.godot/imported/1st_layer.png-24740fd4a0a2851dfe7435d8ecbe461f.ctex"
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_n04ni"]
 tile_data = PackedInt32Array(65536, 196609, 17, 131072, 589825, 7)
@@ -796,7 +797,7 @@ physics_interpolation_mode = 1
 metadata/_edit_lock_ = true
 
 [node name="level_end" type="Area2D" parent="."]
-position = Vector2(-1427, 2264)
+position = Vector2(-1440, 2266)
 collision_layer = 4
 script = ExtResource("7_e0s6l")
 metadata/_edit_group_ = true
