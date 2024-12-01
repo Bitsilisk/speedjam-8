@@ -1,13 +1,14 @@
 extends CharacterBody2D
 
 const SLAM_SENSITIVITY:float = 10
-const TOP_SPEED:float = 300
-const TOP_FLOW_SPEED:float = 500
-const SPEED:float = .25
+const TOP_SPEED:float = 200
+const TOP_FLOW_SPEED:float = 400
+const SPEED:float = .1
 const JUMP_SPEED:float = 300
+const DASH_SPEED:float = 500
 const WALL_DISTANCE:int = 16
 const COYOTE_LENGTH:float = .1
-const FLOW_SPEED_PERCENT:float = .75
+const FLOW_SPEED_PERCENT:float = .9
 const FLOW_BUILD_RATE = 10
 const FLOW_DECAY_RATE = 1
 
@@ -56,21 +57,18 @@ func handle_input(delta:float):
 			jump()
 			sfx_jump.play()
 		else:
-			var new_direction = get_input_direction()
-			var new_velocity:float = new_direction * SPEED * delta * 1000.
-			if abs(velocity.x + new_velocity) < get_top_speed():
-				if new_direction != sign(last_velocity.x):
-					new_velocity *= 2
-				velocity.x += new_velocity
+			apply_horizontal_movement(delta, 1)
 	else:
+		if using_flow:
+			apply_horizontal_movement(delta, 2)
 		if jump_input and forward_raycast.is_colliding():
 			velocity.x = get_top_speed() * -sign(last_velocity.x)
 			jump()
 			sfx_wallkick.play()
 			
-	if Input.is_action_pressed("use_flow") and not is_zero_approx(player_ui.flow_bar.value):
+	if Input.is_action_pressed("use_flow") and not is_zero_approx(player_ui.flow_bar.value) and not is_on_floor():
 		flow += FLOW_BUILD_RATE
-		player_ui.flow_bar.value -= 0.5
+		player_ui.flow_bar.value -= 2
 		heart_particales.emitting = true
 		using_flow = true
 	else:
@@ -78,6 +76,17 @@ func handle_input(delta:float):
 		using_flow = false
 		flow = max(0, flow-FLOW_DECAY_RATE)
 		
+	if Input.is_action_just_pressed("dash"):
+		dash()
+
+func apply_horizontal_movement(delta:float, multiplier:float=1):
+	var new_direction = get_input_direction()
+	var new_velocity:float = new_direction * SPEED * delta * 1000.
+	if abs(velocity.x + new_velocity) < get_top_speed():
+		if new_direction != sign(last_velocity.x):
+			new_velocity *= 2
+		velocity.x += new_velocity
+	
 func get_top_speed():
 	return min(TOP_FLOW_SPEED, TOP_SPEED + flow)
 	
@@ -90,7 +99,6 @@ func check_stun():
 	if movement_direction == 0:
 		var on_floor:bool = is_on_floor()
 		if abs(last_velocity.x) >= TOP_SPEED-SLAM_SENSITIVITY and on_floor:
-			sfx_splat.play()
 			stunned = true
 			on_wall = false
 		elif not on_floor:
@@ -98,7 +106,17 @@ func check_stun():
 	else:
 		stunned = false
 		on_wall = false
+
+func dash():
+#	Gets the direction of the dash, fun fact Input.get_vector() has a weird bug where it's slightly off tilt.
+#	I aint dealing with that issue again.
+	if not player_ui.flow_bar.value == 100:
+		return
+	velocity.x = DASH_SPEED * sign(last_velocity.x)
+	velocity.y = 0
+	player_ui.flow_bar.value = 0
 	
+
 func jump():
 	stunned = false
 	velocity.y = -JUMP_SPEED
@@ -114,7 +132,5 @@ func is_flow_speed() -> bool:
 	return abs(velocity.x) > TOP_SPEED * FLOW_SPEED_PERCENT
 
 func check_flow_state():
-	if is_flow_speed():
+	if is_flow_speed() and is_on_floor():
 		player_ui.flow_bar.value += 1
-	else:
-		player_ui.flow_bar.value -= 1
