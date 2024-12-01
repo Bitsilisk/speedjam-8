@@ -24,6 +24,7 @@ const FLOW_DECAY_RATE = 1
 @onready var sfx_land: AudioStreamPlayer = $sfx_land
 @onready var sfx_splat: AudioStreamPlayer = $sfx_splat
 @onready var sfx_dash: AudioStreamPlayer = $sfx_dash
+@onready var icy_flow: AudioStreamPlayer = $"Icy Flow"
 
 
 # Flow, increases top speed
@@ -78,7 +79,9 @@ func handle_input(delta:float):
 		player_ui.flow_bar.value -= 2
 		heart_particales.emitting = true
 		using_flow = true
+		icy_flow.volume_db = 0.0
 	else:
+		icy_flow.volume_db = -80
 		heart_particales.emitting = false
 		using_flow = false
 		flow = max(0, flow-FLOW_DECAY_RATE)
