@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dcwyewygmjxn4" path="res://assets/art/Tilemap/tilemap_levels3.png" id="2_cww44"]
 [ext_resource type="PackedScene" uid="uid://domm6pbbbfsyr" path="res://scenes/player.tscn" id="3_oi42w"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_prgd1"]
-[ext_resource type="Script" path="res://scenes/level_end.gd" id="5_3cxhj"]
+[ext_resource type="Script" path="res://scripts/level_end.gd" id="5_3cxhj"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_n04ni"]
 tile_data = PackedInt32Array(65536, 196609, 17, 131072, 589825, 7)
