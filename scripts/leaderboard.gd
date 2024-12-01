@@ -24,8 +24,7 @@ var get_name_http = HTTPRequest.new()
 @onready var current_name = $current_name
 
 func _ready():
-	pass
-	#_authentication_request()
+	_authentication_request()
 
 func load_new_info(new_score):
 	_upload_score(new_score)
