@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://bx3n8pi2plujw"]
 
-[ext_resource type="Script" path="res://scripts/main_game.gd" id="1_i4yg0"]
-[ext_resource type="Script" path="res://scripts/leaderboard.gd" id="2_gq2q6"]
-[ext_resource type="Texture2D" uid="uid://iwa2fq84sdrv" path="res://assets/art/Tilemap/title_screen.png" id="2_u32nf"]
+[ext_resource type="Script" path="res://scenes/main_game.gd" id="1_i4yg0"]
+[ext_resource type="Script" path="res://scenes/leaderboard.gd" id="2_gq2q6"]
+[ext_resource type="Texture2D" uid="uid://bajh63ax5q2xt" path="res://assets/art/Tilemap/title_screen.png" id="2_u32nf"]
 [ext_resource type="AudioStream" uid="uid://c8eextcdp3dbw" path="res://assets/audio/sfx/icy_uihoverA.wav" id="4_g12oj"]
 [ext_resource type="AudioStream" uid="uid://dk6xyuqw5w0d4" path="res://assets/audio/sfx/icy_uihoverC#.wav" id="5_nyb13"]
 [ext_resource type="AudioStream" uid="uid://dekfm2fa46s8r" path="res://assets/audio/sfx/icy_uihoverD.wav" id="6_kv7io"]
