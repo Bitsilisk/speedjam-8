@@ -45,7 +45,7 @@ level_loader=""
 
 [gui]
 
-theme/custom_font="res://assets/gui/PressStart2P-Regular.ttf"
+theme/custom="res://default_theme.tres"
 
 [input]
 

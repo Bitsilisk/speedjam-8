@@ -1,0 +1,13 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://qxdouw2hj0b4"]
+
+[ext_resource type="FontFile" uid="uid://dtxdmpm5t4kh2" path="res://assets/gui/PressStart2P-Regular.ttf" id="1_7516m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_011cx"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+
+[resource]
+default_font = ExtResource("1_7516m")
+Button/styles/normal = SubResource("StyleBoxFlat_011cx")

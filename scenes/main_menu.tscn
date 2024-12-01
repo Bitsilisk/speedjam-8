@@ -10,6 +10,10 @@
 [ext_resource type="AudioStream" uid="uid://bkjkh7ww45pe1" path="res://assets/audio/music/Icy-Title.ogg" id="7_7rkhp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e5lk2"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
 bg_color = Color(0.980392, 0.87451, 0.952941, 1)
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("level_choices") groups=["level_loader"]]
@@ -21,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_427ti")
 levels = Array[PackedScene]([ExtResource("2_tcuku"), ExtResource("3_f54ws"), ExtResource("4_4q5pf"), ExtResource("5_cwl87")])
-level_choices = NodePath("CenterContainer/HBoxContainer/LevelChoices")
+level_choices = NodePath("MarginContainer/HBoxContainer/LevelChoices")
 
 [node name="Background" type="TextureRect" parent="."]
 texture_filter = 1
@@ -49,7 +53,7 @@ metadata/_aseprite_wizard_config_ = {
 }
 metadata/_aseprite_wizard_source_file_hash_ = "4b31be967e28a08195d1aa5fedb8c6f6"
 
-[node name="CenterContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -63,50 +67,50 @@ theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 100
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="start" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="start" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_e5lk2")
 text = "Start"
 
-[node name="choose_level" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="choose_level" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Choose Level"
 
-[node name="credits" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="credits" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Credits"
 
-[node name="leaderboard" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="leaderboard" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "leaderboard"
 
-[node name="LevelChoices" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
+[node name="LevelChoices" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 visible = false
 layout_mode = 2
 
-[node name="credits" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
+[node name="credits" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 visible = false
 layout_mode = 2
 
-[node name="art" type="Label" parent="CenterContainer/HBoxContainer/credits"]
+[node name="art" type="Label" parent="MarginContainer/HBoxContainer/credits"]
 layout_mode = 2
 text = "Art- Pontax"
 
-[node name="coding" type="Label" parent="CenterContainer/HBoxContainer/credits"]
+[node name="coding" type="Label" parent="MarginContainer/HBoxContainer/credits"]
 layout_mode = 2
 text = "Coding- Caaz, ArturGin"
 
-[node name="sfx and music" type="Label" parent="CenterContainer/HBoxContainer/credits"]
+[node name="sfx and music" type="Label" parent="MarginContainer/HBoxContainer/credits"]
 layout_mode = 2
 text = "Sfx & Music- Joe"
 
@@ -260,11 +264,11 @@ layout_mode = 2
 text = "Thanks for playing!"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer/start" to="." method="_on_start_pressed"]
-[connection signal="toggled" from="CenterContainer/HBoxContainer/VBoxContainer/choose_level" to="." method="_on_choose_level_toggled"]
-[connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer/credits" to="." method="_on_credits_pressed"]
-[connection signal="toggled" from="CenterContainer/HBoxContainer/VBoxContainer/credits" to="." method="_on_credits_toggled"]
-[connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer/leaderboard" to="." method="_on_leaderboard_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/start" to="." method="_on_start_pressed"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/VBoxContainer/choose_level" to="." method="_on_choose_level_toggled"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/credits" to="." method="_on_credits_pressed"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/VBoxContainer/credits" to="." method="_on_credits_toggled"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/leaderboard" to="." method="_on_leaderboard_pressed"]
 [connection signal="pressed" from="leaderboard_container/MarginContainer/leaderboard/HBoxContainer/prev_page" to="leaderboard_container/MarginContainer/leaderboard" method="_on_prev_page_pressed"]
 [connection signal="pressed" from="leaderboard_container/MarginContainer/leaderboard/HBoxContainer/next_page" to="leaderboard_container/MarginContainer/leaderboard" method="_on_next_page_pressed"]
 [connection signal="pressed" from="leaderboard_container/MarginContainer/leaderboard/close" to="." method="_on_close_pressed"]
