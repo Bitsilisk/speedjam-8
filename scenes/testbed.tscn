@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://gpvibk1sokii" path="res://assets/art/Tilemap/Parallax/2nd_layer.png" id="2_fwqef"]
 [ext_resource type="PackedScene" uid="uid://domm6pbbbfsyr" path="res://scenes/player.tscn" id="2_mgii0"]
 [ext_resource type="Texture2D" uid="uid://cqt5hekt5ga51" path="res://assets/art/Tilemap/Parallax/3rd_layer.png" id="3_c5gba"]
-[ext_resource type="Script" path="res://scenes/level_end.gd" id="4_04eov"]
+[ext_resource type="Script" path="res://scripts/level_end.gd" id="4_04eov"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_syhr8"]
 [ext_resource type="AudioStream" uid="uid://cwktxlaw3ulih" path="res://assets/audio/music/Icy-Fun.ogg" id="9_8173o"]
 

@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://bx3n8pi2plujw"]
+
+[ext_resource type="PackedScene" uid="uid://bdldxaka32a6w" path="res://scenes/main_menu.tscn" id="2_wl0pp"]
+[ext_resource type="AudioStream" uid="uid://c8eextcdp3dbw" path="res://assets/audio/sfx/icy_uihoverA.wav" id="3_2iioh"]
+[ext_resource type="AudioStream" uid="uid://dk6xyuqw5w0d4" path="res://assets/audio/sfx/icy_uihoverC#.wav" id="4_pyh1i"]
+[ext_resource type="AudioStream" uid="uid://dekfm2fa46s8r" path="res://assets/audio/sfx/icy_uihoverD.wav" id="5_yb8db"]
+[ext_resource type="AudioStream" uid="uid://d4eeh8808l5yo" path="res://assets/audio/sfx/icy_uihoverF#.wav" id="6_i4lgk"]
+[ext_resource type="AudioStream" uid="uid://bic1r6kiobaqo" path="res://assets/audio/sfx/icy_uihoverG.wav" id="7_ddyam"]
+[ext_resource type="AudioStream" uid="uid://bja6thudab6hb" path="res://assets/audio/sfx/icy_uiclick.wav" id="8_a8cvk"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sm0iu"]
+streams_count = 5
+stream_0/stream = ExtResource("3_2iioh")
+stream_1/stream = ExtResource("4_pyh1i")
+stream_1/weight = 0.25
+stream_2/stream = ExtResource("5_yb8db")
+stream_3/stream = ExtResource("6_i4lgk")
+stream_4/stream = ExtResource("7_ddyam")
+stream_4/weight = 0.25
+
+[node name="Main" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenu" parent="." node_paths=PackedStringArray("game_node") instance=ExtResource("2_wl0pp")]
+layout_mode = 1
+game_node = NodePath("../Game")
+
+[node name="Game" type="Node2D" parent="."]
+process_mode = 1
+
+[node name="sfx_uihover" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_sm0iu")
+bus = &"SFX"
+
+[node name="sfx_uiclick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_a8cvk")
+bus = &"SFX"
