@@ -31,8 +31,7 @@ func _ready():
 func load_new_info(new_score):
 	_upload_score(new_score)
 	#update_info()
-	
-	
+		
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("enter"):
 		_change_player_name()

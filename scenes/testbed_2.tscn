@@ -859,7 +859,7 @@ metadata/_edit_lock_ = true
 [node name="tutorial 1" type="Node2D" parent="."]
 
 [node name="level_end" type="Area2D" parent="."]
-position = Vector2(229, 420)
+position = Vector2(263, 413)
 collision_layer = 4
 script = ExtResource("8_kfqqn")
 metadata/_edit_group_ = true

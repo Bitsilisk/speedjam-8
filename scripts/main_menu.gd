@@ -9,9 +9,11 @@ var current_level
 @onready var leaderboard_logic = $leaderboard_container/MarginContainer/leaderboard
 var levels_played := []
 var total_time_all_levels: int
+var curr_level_time: int
 
 @onready var icy_title: AudioStreamPlayer = $"Icy Title"
 @onready var between_levels_screen = $between_levels
+@onready var level_time = $between_levels/MarginContainer/HBoxContainer/level_time
 @onready var end_screen = $end_screen
 @onready var total_time_text = $end_screen/CenterContainer/VBoxContainer/total_time
 
@@ -22,6 +24,7 @@ func _ready() -> void:
 		var button = Button.new()
 		button.text = "Level {0}".format([level+1])
 		button.pressed.connect(func():
+			icy_title.stop()
 			load_level(level)
 		)
 		level_choices.add_child(button)
@@ -61,17 +64,21 @@ func reload_level():
 func load_next_level():
 	show()
 	$CenterContainer.hide()
-	levels_played.append(current_level)
+	curr_level_time = get_tree().get_first_node_in_group("player_ui"
+				).report_discard_time()		
+
+	if levels.size() == (current_level + 1):
+		levels_played.append(current_level)
+
 	if levels.size() == (current_level + 1) && played_all_levels():
+		total_time_all_levels += curr_level_time
 		unload_level()
 		total_time_text.text = "Your total time: " + str(total_time_all_levels)
 		end_screen.show()
 	else:
-		total_time_all_levels += get_tree().get_first_node_in_group("player_ui"
-			).total_time
 		unload_level()
+		level_time.text = str(total_time_all_levels) + " Level Time: " + str(int(curr_level_time))
 		between_levels_screen.show()
-		#load_level(current_level + 1)
 
 func _on_leaderboard_pressed() -> void:
 	leaderboard.show()
@@ -90,8 +97,16 @@ func _on_again_pressed() -> void:
 	reload_level()
 	
 func _on_next_level_pressed() -> void:
+	between_levels_screen.hide()
+	levels_played.append(current_level)
+	total_time_all_levels += curr_level_time
+	curr_level_time = 0
 	load_level(current_level + 1)
-
 
 func _on_submit_time_pressed() -> void:
 	leaderboard_logic.load_new_info(total_time_all_levels)
+	end_screen.hide()
+	leaderboard_logic.update_info()
+	leaderboard.show()
+	
+	
