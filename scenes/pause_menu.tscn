@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_5o1ba"]
 
 [node name="pause_menu" type="CanvasLayer"]
-process_mode = 3
+process_mode = 2
 
 [node name="pause_menu" type="MarginContainer" parent="."]
 process_mode = 3
@@ -23,16 +23,10 @@ size_flags_vertical = 4
 layout_mode = 2
 text = "Resume"
 
-[node name="controls" type="Button" parent="pause_menu/VBoxContainer"]
-layout_mode = 2
-text = "Controls
-"
-
 [node name="exit" type="Button" parent="pause_menu/VBoxContainer"]
 layout_mode = 2
 text = "Exit (all progress will be lost)
 "
 
 [connection signal="pressed" from="pause_menu/VBoxContainer/resume" to="pause_menu" method="_on_resume_pressed"]
-[connection signal="pressed" from="pause_menu/VBoxContainer/controls" to="pause_menu" method="_on_controls_pressed"]
 [connection signal="pressed" from="pause_menu/VBoxContainer/exit" to="pause_menu" method="_on_exit_pressed"]

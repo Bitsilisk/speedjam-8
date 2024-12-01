@@ -7,6 +7,9 @@
 layer = 2
 script = ExtResource("1_in8xn")
 
+[node name="pause_menu" parent="." instance=ExtResource("2_shlir")]
+layer = 3
+
 [node name="hud" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -49,8 +52,6 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-
-[node name="pause_menu" parent="." instance=ExtResource("2_shlir")]
 
 [node name="Timer" type="Timer" parent="."]
 

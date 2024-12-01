@@ -21,7 +21,7 @@ var get_name_http = HTTPRequest.new()
 @onready var all_score = $all_score
 @onready var name_enter = $name_enter
 @onready var player_score = $player_score
-@onready var current_name = $current_name
+var current_name
 
 func _ready():
 	_authentication_request()
@@ -94,6 +94,7 @@ func _on_authentication_request_completed(result, response_code, headers, body):
 
 func update_info():
 	_get_leaderboards()
+	_get_player_name()
 	_get_player_score()
 
 func _get_player_score():
@@ -117,7 +118,7 @@ func _on_player_score_request_completed(result, response_code, headers, body):
 	print("player_score", json.get_data())
 	if !json.get_data().has('player'):
 		return
-	player_score.set_text("Your best time is: " + str(json.get_data().score) + ' seconds')
+	player_score.set_text(current_name + ": " + str(json.get_data().score) + ' seconds')
 	set_current_name(json.get_data().player.name)
 	# Formatting as a leaderboard
 	#var leaderboardFormatted = ""
@@ -130,7 +131,7 @@ func _on_player_score_request_completed(result, response_code, headers, body):
 
 func _get_leaderboards():
 	print("Getting leaderboards")
-	var url = "https://api.lootlocker.io/game/leaderboards/"+leaderboard_key+"/list?count=10"
+	var url = "https://api.lootlocker.io/game/leaderboards/"+leaderboard_key+"/list?count=5"
 	var headers = ["Content-Type: application/json", "x-session-token:"+session_token]
 	
 	# Create a request node for getting the highscore
@@ -152,7 +153,14 @@ func _on_leaderboard_request_completed(result, response_code, headers, body):
 	var leaderboardFormatted = ""
 	for n in json.get_data().items.size():
 		leaderboardFormatted += str(json.get_data().items[n].rank)+str(". ")
-		leaderboardFormatted += str(json.get_data().items[n].player.name)+str(" - ")
+		var player_name = str(json.get_data().items[n].player.name)
+		var id = str(json.get_data().items[n].player.id)
+		var id_or_name
+		if player_name == "":
+			id_or_name = id
+		else:
+			id_or_name = player_name
+		leaderboardFormatted += id_or_name+str(" - ")
 		leaderboardFormatted += str(json.get_data().items[n].score)+' sec'+str("\n")
 	# Print the formatted leaderboard to the console
 	all_score.set_text(leaderboardFormatted)
@@ -173,7 +181,8 @@ func _upload_score(score: int):
 	print(data)
 
 func set_current_name(player_name: String):
-	current_name.text = "Your name is: " + player_name
+	current_name = player_name
+	name_enter.text = player_name
 
 func _change_player_name():
 	print("Changing player name")
@@ -220,6 +229,7 @@ func _on_player_get_name_request_completed(result, response_code, headers, body)
 	# Print data
 	print(json.get_data())
 	# Print player name
+	current_name = json.get_data().name
 	print(json.get_data().name)
 
 func _on_upload_score_request_completed(result, response_code, headers, body) :

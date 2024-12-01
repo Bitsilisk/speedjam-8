@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bx3n8pi2plujw"]
+[gd_scene load_steps=9 format=3 uid="uid://dejhsital8kuo"]
 
 [ext_resource type="PackedScene" uid="uid://bdldxaka32a6w" path="res://scenes/main_menu.tscn" id="2_wl0pp"]
 [ext_resource type="AudioStream" uid="uid://c8eextcdp3dbw" path="res://assets/audio/sfx/icy_uihoverA.wav" id="3_2iioh"]

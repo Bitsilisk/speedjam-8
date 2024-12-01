@@ -1,7 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://wdepwbmrptfl"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xpyxs"]
-load_path = "res://.godot/imported/end_flag.png-e1587bc9ed58ea34f46204a2268bc1d9.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pcpq2"]
 atlas = SubResource("CompressedTexture2D_xpyxs")

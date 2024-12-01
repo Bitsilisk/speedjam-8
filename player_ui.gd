@@ -13,8 +13,9 @@ func _ready():
 func _process(_delta) -> void:
 	if Input.is_action_just_pressed("restart"):
 		get_tree().paused = false
-		if get_tree().current_scene.has_method('reload_level'):
-			get_tree().current_scene.reload_level()
+		var level_loader = get_tree().get_first_node_in_group("level_loader")
+		if level_loader:
+			level_loader.reload_level()
 		else:
 			get_tree().reload_current_scene()
 		

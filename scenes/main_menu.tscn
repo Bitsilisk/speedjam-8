@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdldxaka32a6w"]
+[gd_scene load_steps=6 format=3 uid="uid://bdldxaka32a6w"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_427ti"]
 [ext_resource type="PackedScene" uid="uid://3jyy2ushgi0" path="res://scenes/testbed.tscn" id="2_a27nq"]
 [ext_resource type="Script" path="res://scripts/leaderboard.gd" id="2_aedt5"]
-[ext_resource type="Texture2D" uid="uid://ygpfseh0km1g" path="res://assets/art/title_screen.png" id="3_ahafd"]
+[ext_resource type="PackedScene" uid="uid://c35p46nb6m26w" path="res://scenes/testbed_2.tscn" id="2_tcuku"]
+[ext_resource type="Texture2D" uid="uid://iwa2fq84sdrv" path="res://assets/art/Tilemap/title_screen.png" id="3_ahafd"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("level_choices")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("level_choices") groups=["level_loader"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_427ti")
-levels = Array[PackedScene]([ExtResource("2_a27nq")])
+levels = Array[PackedScene]([ExtResource("2_tcuku"), ExtResource("2_a27nq")])
 level_choices = NodePath("CenterContainer/HBoxContainer/LevelChoices")
 
 [node name="Background" type="TextureRect" parent="."]
@@ -48,7 +49,8 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -160.0
+offset_top = -162.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/margin_left = 10
@@ -73,36 +75,88 @@ text = "Choose Level"
 
 [node name="credits" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+toggle_mode = true
 text = "Credits"
 
-[node name="leaderboard" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
-visible = false
+[node name="leaderboard" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
-script = ExtResource("2_aedt5")
-
-[node name="all_score" type="Label" parent="CenterContainer/HBoxContainer/leaderboard"]
-layout_mode = 2
-text = "Loading leaderboard"
-
-[node name="player_score" type="Label" parent="CenterContainer/HBoxContainer/leaderboard"]
-layout_mode = 2
-text = "Loading your score"
-
-[node name="current_name" type="Label" parent="CenterContainer/HBoxContainer/leaderboard"]
-layout_mode = 2
-text = "Your name: "
-
-[node name="name_enter" type="LineEdit" parent="CenterContainer/HBoxContainer/leaderboard"]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-placeholder_text = "Enter your name"
-max_length = 20
+text = "leaderboard"
 
 [node name="LevelChoices" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
 visible = false
 layout_mode = 2
 
+[node name="credits" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="art" type="Label" parent="CenterContainer/HBoxContainer/credits"]
+layout_mode = 2
+text = "Art- Pontax"
+
+[node name="coding" type="Label" parent="CenterContainer/HBoxContainer/credits"]
+layout_mode = 2
+text = "Coding- Caaz, ArturGin"
+
+[node name="sfx and music" type="Label" parent="CenterContainer/HBoxContainer/credits"]
+layout_mode = 2
+text = "Sfx & Music- Joe"
+
+[node name="leaderboard" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="leaderboard"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 618.0
+offset_bottom = 338.0
+color = Color(0.109804, 0.109804, 0.109804, 0.678431)
+
+[node name="MarginContainer" type="MarginContainer" parent="leaderboard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="leaderboard" type="VBoxContainer" parent="leaderboard/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+script = ExtResource("2_aedt5")
+
+[node name="all_score" type="Label" parent="leaderboard/MarginContainer/leaderboard"]
+layout_mode = 2
+text = "Loading leaderboard"
+
+[node name="player_score" type="Label" parent="leaderboard/MarginContainer/leaderboard"]
+layout_mode = 2
+text = "Loading your score"
+
+[node name="name_enter" type="LineEdit" parent="leaderboard/MarginContainer/leaderboard"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+placeholder_text = "Enter your name"
+max_length = 20
+
+[node name="close" type="Button" parent="leaderboard/MarginContainer/leaderboard"]
+layout_mode = 2
+text = "close"
+
 [connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer/start" to="." method="_on_start_pressed"]
 [connection signal="toggled" from="CenterContainer/HBoxContainer/VBoxContainer/choose_level" to="." method="_on_choose_level_toggled"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer/credits" to="." method="_on_credits_pressed"]
+[connection signal="toggled" from="CenterContainer/HBoxContainer/VBoxContainer/credits" to="." method="_on_credits_toggled"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer/leaderboard" to="." method="_on_leaderboard_pressed"]
+[connection signal="pressed" from="leaderboard/MarginContainer/leaderboard/close" to="." method="_on_close_pressed"]
