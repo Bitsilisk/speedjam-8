@@ -1,22 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://bdldxaka32a6w"]
+[gd_scene load_steps=9 format=3 uid="uid://bdldxaka32a6w"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_427ti"]
-[ext_resource type="Script" path="res://scripts/leaderboard.gd" id="2_aedt5"]
-[ext_resource type="PackedScene" uid="uid://c35p46nb6m26w" path="res://scenes/testbed_2.tscn" id="2_tcuku"]
+[ext_resource type="PackedScene" uid="uid://c35p46nb6m26w" path="res://scenes/levels/testbed_2.tscn" id="2_tcuku"]
 [ext_resource type="Texture2D" uid="uid://iwa2fq84sdrv" path="res://assets/art/Tilemap/title_screen.png" id="3_ahafd"]
-[ext_resource type="PackedScene" uid="uid://3jyy2ushgi0" path="res://scenes/testbed.tscn" id="3_f54ws"]
-[ext_resource type="PackedScene" uid="uid://cbvah23wyy74o" path="res://scenes/level_4.tscn" id="4_4q5pf"]
-[ext_resource type="PackedScene" uid="uid://btub3thp8g6v6" path="res://scenes/level_5.tscn" id="5_cwl87"]
-[ext_resource type="AudioStream" uid="uid://bkjkh7ww45pe1" path="res://assets/audio/music/Icy-Title.ogg" id="7_7rkhp"]
+[ext_resource type="PackedScene" uid="uid://3jyy2ushgi0" path="res://scenes/levels/testbed.tscn" id="3_f54ws"]
+[ext_resource type="PackedScene" uid="uid://cbvah23wyy74o" path="res://scenes/levels/level_4.tscn" id="4_4q5pf"]
+[ext_resource type="PackedScene" uid="uid://btub3thp8g6v6" path="res://scenes/levels/level_5.tscn" id="5_cwl87"]
+[ext_resource type="PackedScene" uid="uid://dsh6f6l25tv24" path="res://scenes/levels/level_3.tscn" id="5_qkove"]
+[ext_resource type="StyleBox" uid="uid://dtbi1sq0ahxe" path="res://assets/art/ui/pink_button_style.tres" id="7_2blsd"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e5lk2"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.980392, 0.87451, 0.952941, 1)
-
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("level_choices") groups=["level_loader"]]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("level_choices", "credits", "leaderboard") groups=["level_loader"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,8 +17,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_427ti")
-levels = Array[PackedScene]([ExtResource("2_tcuku"), ExtResource("3_f54ws"), ExtResource("4_4q5pf"), ExtResource("5_cwl87")])
+levels = Array[PackedScene]([ExtResource("2_tcuku"), ExtResource("3_f54ws"), ExtResource("5_qkove"), ExtResource("4_4q5pf"), ExtResource("5_cwl87")])
 level_choices = NodePath("MarginContainer/HBoxContainer/LevelChoices")
+credits = NodePath("MarginContainer/HBoxContainer/Credits")
+leaderboard = NodePath("")
 
 [node name="Background" type="TextureRect" parent="."]
 texture_filter = 1
@@ -59,130 +54,63 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -162.0
-offset_bottom = -2.0
+offset_top = -124.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 100
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 
 [node name="start" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_e5lk2")
+mouse_default_cursor_shape = 2
 text = "Start"
 
 [node name="choose_level" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 toggle_mode = true
 text = "Choose Level"
 
 [node name="credits" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 toggle_mode = true
 text = "Credits"
 
 [node name="leaderboard" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-text = "leaderboard"
+mouse_default_cursor_shape = 2
+text = "Leaderboard"
 
 [node name="LevelChoices" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 visible = false
 layout_mode = 2
 
-[node name="credits" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="Credits" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="art" type="Label" parent="MarginContainer/HBoxContainer/credits"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Credits"]
+custom_minimum_size = Vector2(234.89, 0)
 layout_mode = 2
-text = "Art- Pontax"
-
-[node name="coding" type="Label" parent="MarginContainer/HBoxContainer/credits"]
-layout_mode = 2
-text = "Coding- Caaz, ArturGin"
-
-[node name="sfx and music" type="Label" parent="MarginContainer/HBoxContainer/credits"]
-layout_mode = 2
-text = "Sfx & Music- Joe"
-
-[node name="leaderboard_container" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="leaderboard_container"]
-layout_mode = 0
-offset_left = 25.0
-offset_top = 25.0
-offset_right = 618.0
-offset_bottom = 338.0
-color = Color(0.109804, 0.109804, 0.109804, 0.956863)
-
-[node name="MarginContainer" type="MarginContainer" parent="leaderboard_container"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-
-[node name="leaderboard" type="VBoxContainer" parent="leaderboard_container/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-script = ExtResource("2_aedt5")
-
-[node name="all_score" type="Label" parent="leaderboard_container/MarginContainer/leaderboard"]
-layout_mode = 2
-text = "Loading leaderboard"
-
-[node name="player_score" type="Label" parent="leaderboard_container/MarginContainer/leaderboard"]
-layout_mode = 2
-text = "Loading your score"
-
-[node name="name_enter" type="LineEdit" parent="leaderboard_container/MarginContainer/leaderboard"]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-placeholder_text = "Enter your name"
-max_length = 20
-
-[node name="HBoxContainer" type="HBoxContainer" parent="leaderboard_container/MarginContainer/leaderboard"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="prev_page" type="Button" parent="leaderboard_container/MarginContainer/leaderboard/HBoxContainer"]
-layout_mode = 2
-text = "prev_page"
-
-[node name="next_page" type="Button" parent="leaderboard_container/MarginContainer/leaderboard/HBoxContainer"]
-layout_mode = 2
-text = "next_page
-"
-
-[node name="close" type="Button" parent="leaderboard_container/MarginContainer/leaderboard"]
-layout_mode = 2
-text = "close"
-
-[node name="Icy Title" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_7rkhp")
-bus = &"Music"
+text = "Art - Pontax
+Coding - Caaz, ArturGinRad
+SFX & Music - Joe"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="between_levels" type="Control" parent="."]
 visible = false
@@ -212,14 +140,20 @@ size_flags_vertical = 4
 
 [node name="level_time" type="Label" parent="between_levels/MarginContainer/HBoxContainer"]
 layout_mode = 2
-text = "level time - "
+text = "Level Time - "
 
 [node name="again" type="Button" parent="between_levels/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(115, 25)
 layout_mode = 2
-text = "AGain!"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("7_2blsd")
+text = "Again!"
 
 [node name="next_level" type="Button" parent="between_levels/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(140, 25)
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("7_2blsd")
 text = "Next one"
 
 [node name="end_screen" type="Control" parent="."]
@@ -256,7 +190,10 @@ text = "Your total time:"
 horizontal_alignment = 1
 
 [node name="submit_time" type="Button" parent="end_screen/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("7_2blsd")
 text = "Submit"
 
 [node name="Label2" type="Label" parent="end_screen/CenterContainer/VBoxContainer"]
@@ -269,9 +206,6 @@ horizontal_alignment = 1
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/credits" to="." method="_on_credits_pressed"]
 [connection signal="toggled" from="MarginContainer/HBoxContainer/VBoxContainer/credits" to="." method="_on_credits_toggled"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/leaderboard" to="." method="_on_leaderboard_pressed"]
-[connection signal="pressed" from="leaderboard_container/MarginContainer/leaderboard/HBoxContainer/prev_page" to="leaderboard_container/MarginContainer/leaderboard" method="_on_prev_page_pressed"]
-[connection signal="pressed" from="leaderboard_container/MarginContainer/leaderboard/HBoxContainer/next_page" to="leaderboard_container/MarginContainer/leaderboard" method="_on_next_page_pressed"]
-[connection signal="pressed" from="leaderboard_container/MarginContainer/leaderboard/close" to="." method="_on_close_pressed"]
 [connection signal="pressed" from="between_levels/MarginContainer/HBoxContainer/again" to="." method="_on_again_pressed"]
 [connection signal="pressed" from="between_levels/MarginContainer/HBoxContainer/next_level" to="." method="_on_next_level_pressed"]
 [connection signal="pressed" from="end_screen/CenterContainer/VBoxContainer/submit_time" to="." method="_on_submit_time_pressed"]

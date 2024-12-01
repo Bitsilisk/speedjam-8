@@ -1,5 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dejhsital8kuo"]
+[gd_scene load_steps=11 format=3 uid="uid://dejhsital8kuo"]
 
+[ext_resource type="PackedScene" uid="uid://c2f75ss4k6uba" path="res://scenes/music_manager.tscn" id="1_300cy"]
+[ext_resource type="PackedScene" uid="uid://bh3my8ljgw02s" path="res://scenes/leaderboard.tscn" id="2_em8um"]
 [ext_resource type="PackedScene" uid="uid://bdldxaka32a6w" path="res://scenes/main_menu.tscn" id="2_wl0pp"]
 [ext_resource type="AudioStream" uid="uid://c8eextcdp3dbw" path="res://assets/audio/sfx/icy_uihoverA.wav" id="3_2iioh"]
 [ext_resource type="AudioStream" uid="uid://dk6xyuqw5w0d4" path="res://assets/audio/sfx/icy_uihoverC#.wav" id="4_pyh1i"]
@@ -27,9 +29,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MainMenu" parent="." node_paths=PackedStringArray("game_node") instance=ExtResource("2_wl0pp")]
+[node name="MusicManager" parent="." instance=ExtResource("1_300cy")]
+unique_name_in_owner = true
+
+[node name="MainMenu" parent="." node_paths=PackedStringArray("leaderboard", "game_node") instance=ExtResource("2_wl0pp")]
 layout_mode = 1
+leaderboard = NodePath("../LeaderboardContainer")
 game_node = NodePath("../Game")
+
+[node name="LeaderboardContainer" parent="." instance=ExtResource("2_em8um")]
+layout_mode = 0
 
 [node name="Game" type="Node2D" parent="."]
 process_mode = 1
