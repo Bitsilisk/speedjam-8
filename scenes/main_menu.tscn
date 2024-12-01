@@ -1,0 +1,103 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdldxaka32a6w"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_427ti"]
+[ext_resource type="Texture2D" uid="uid://ddea8yd2pdl2i" path="res://scenes/title_screen.png" id="1_mnw4v"]
+[ext_resource type="PackedScene" uid="uid://3jyy2ushgi0" path="res://scenes/testbed.tscn" id="2_a27nq"]
+[ext_resource type="Script" path="res://scripts/leaderboard.gd" id="2_aedt5"]
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("level_choices")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_427ti")
+levels = Array[PackedScene]([ExtResource("2_a27nq")])
+level_choices = NodePath("CenterContainer/HBoxContainer/LevelChoices")
+
+[node name="Background" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_mnw4v")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Asesprite/Projects/speedjam/background/title_screen.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "4b31be967e28a08195d1aa5fedb8c6f6"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="start" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="choose_level" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Choose Level"
+
+[node name="credits" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+
+[node name="leaderboard" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 20
+script = ExtResource("2_aedt5")
+
+[node name="all_score" type="Label" parent="CenterContainer/HBoxContainer/leaderboard"]
+layout_mode = 2
+text = "Loading leaderboard"
+
+[node name="player_score" type="Label" parent="CenterContainer/HBoxContainer/leaderboard"]
+layout_mode = 2
+text = "Loading your score"
+
+[node name="current_name" type="Label" parent="CenterContainer/HBoxContainer/leaderboard"]
+layout_mode = 2
+text = "Your name: "
+
+[node name="name_enter" type="LineEdit" parent="CenterContainer/HBoxContainer/leaderboard"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+placeholder_text = "Enter your name"
+max_length = 20
+
+[node name="LevelChoices" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer/start" to="." method="_on_start_pressed"]
+[connection signal="toggled" from="CenterContainer/HBoxContainer/VBoxContainer/choose_level" to="." method="_on_choose_level_toggled"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer/credits" to="." method="_on_credits_pressed"]
