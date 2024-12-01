@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_prgd1"]
 [ext_resource type="Texture2D" uid="uid://btlc4o0enf0kb" path="res://assets/art/Tilemap/end_flag.png" id="6_s4wqf"]
 [ext_resource type="Script" path="res://scripts/tutorial_follow_text.gd" id="6_vr8sl"]
-[ext_resource type="Texture2D" uid="uid://b8rykpel0y8vy" path="res://assets/art/Tilemap/Parallax/1st_layer.png" id="7_x6ugl"]
+[ext_resource type="Texture2D" uid="uid://ceinc3yxgseky" path="res://assets/art/Tilemap/Parallax/1st_layer.png" id="7_x6ugl"]
 [ext_resource type="Script" path="res://scripts/level_end.gd" id="8_kfqqn"]
 [ext_resource type="Texture2D" uid="uid://gpvibk1sokii" path="res://assets/art/Tilemap/Parallax/2nd_layer.png" id="8_m00cu"]
 [ext_resource type="Texture2D" uid="uid://cqt5hekt5ga51" path="res://assets/art/Tilemap/Parallax/3rd_layer.png" id="9_53yqn"]

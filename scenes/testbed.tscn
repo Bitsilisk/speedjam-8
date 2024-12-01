@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=4 uid="uid://3jyy2ushgi0"]
 
 [ext_resource type="Texture2D" uid="uid://bpsg5t6kxamyr" path="res://assets/art/Tilemap/tilemap_levels2.png" id="1_c010y"]
-[ext_resource type="Texture2D" uid="uid://b8rykpel0y8vy" path="res://assets/art/Tilemap/Parallax/1st_layer.png" id="1_qvh5d"]
+[ext_resource type="Texture2D" uid="uid://ceinc3yxgseky" path="res://assets/art/Tilemap/Parallax/1st_layer.png" id="1_qvh5d"]
 [ext_resource type="Texture2D" uid="uid://dcwyewygmjxn4" path="res://assets/art/Tilemap/tilemap_levels3.png" id="2_dpg70"]
 [ext_resource type="Texture2D" uid="uid://gpvibk1sokii" path="res://assets/art/Tilemap/Parallax/2nd_layer.png" id="2_fwqef"]
 [ext_resource type="PackedScene" uid="uid://domm6pbbbfsyr" path="res://scenes/player.tscn" id="2_mgii0"]
@@ -829,7 +829,7 @@ metadata/_aseprite_wizard_source_file_hash_ = "3685732c42826442be4d9c017d818e2b"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(-246.6, 68.4)
+position = Vector2(-411, 114)
 metadata/_edit_lock_ = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -845,7 +845,7 @@ tile_set = SubResource("TileSet_cqscs")
 position = Vector2(-411, 114)
 
 [node name="level_end" type="Area2D" parent="."]
-position = Vector2(-1342, 1237)
+position = Vector2(-1342, 1242)
 collision_layer = 4
 script = ExtResource("4_04eov")
 metadata/_edit_group_ = true
