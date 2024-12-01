@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bdldxaka32a6w"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_427ti"]
-[ext_resource type="Texture2D" uid="uid://ddea8yd2pdl2i" path="res://scenes/title_screen.png" id="1_mnw4v"]
 [ext_resource type="PackedScene" uid="uid://3jyy2ushgi0" path="res://scenes/testbed.tscn" id="2_a27nq"]
 [ext_resource type="Script" path="res://scripts/leaderboard.gd" id="2_aedt5"]
+[ext_resource type="Texture2D" uid="uid://ygpfseh0km1g" path="res://assets/art/title_screen.png" id="3_ahafd"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("level_choices")]
 layout_mode = 3
@@ -24,7 +24,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_mnw4v")
+texture = ExtResource("3_ahafd")
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
 }
@@ -42,13 +42,18 @@ metadata/_aseprite_wizard_config_ = {
 }
 metadata/_aseprite_wizard_source_file_hash_ = "4b31be967e28a08195d1aa5fedb8c6f6"
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -160.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
 layout_mode = 2
@@ -71,6 +76,7 @@ layout_mode = 2
 text = "Credits"
 
 [node name="leaderboard" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 20
 script = ExtResource("2_aedt5")
