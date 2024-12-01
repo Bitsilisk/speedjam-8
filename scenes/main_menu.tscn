@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdldxaka32a6w"]
+[gd_scene load_steps=7 format=3 uid="uid://bdldxaka32a6w"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_427ti"]
 [ext_resource type="PackedScene" uid="uid://3jyy2ushgi0" path="res://scenes/testbed.tscn" id="2_a27nq"]
 [ext_resource type="Script" path="res://scripts/leaderboard.gd" id="2_aedt5"]
 [ext_resource type="PackedScene" uid="uid://c35p46nb6m26w" path="res://scenes/testbed_2.tscn" id="2_tcuku"]
 [ext_resource type="Texture2D" uid="uid://iwa2fq84sdrv" path="res://assets/art/Tilemap/title_screen.png" id="3_ahafd"]
+[ext_resource type="PackedScene" uid="uid://cbvah23wyy74o" path="res://scenes/level_4.tscn" id="4_ipy7d"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("level_choices") groups=["level_loader"]]
 layout_mode = 3
@@ -14,7 +15,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_427ti")
-levels = Array[PackedScene]([ExtResource("2_tcuku"), ExtResource("2_a27nq")])
+levels = Array[PackedScene]([ExtResource("2_tcuku"), ExtResource("2_a27nq"), ExtResource("4_ipy7d")])
 level_choices = NodePath("CenterContainer/HBoxContainer/LevelChoices")
 
 [node name="Background" type="TextureRect" parent="."]
