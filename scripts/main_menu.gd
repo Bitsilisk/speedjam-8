@@ -10,8 +10,12 @@ var current_level
 var levels_played := []
 var total_time: int
 
+@onready var icy_title: AudioStreamPlayer = $"Icy Title"
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	icy_title.play()
 	for level in range(levels.size()):
 		var button = Button.new()
 		button.text = "Level {0}".format([level+1])
@@ -43,6 +47,7 @@ func _process(delta: float) -> void:
 
 func _on_start_pressed() -> void:
 	load_level(0)
+	icy_title.stop()
 
 func _on_choose_level_toggled(toggled_on: bool) -> void:
 	credits.visible = false

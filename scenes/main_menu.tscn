@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdldxaka32a6w"]
+[gd_scene load_steps=8 format=3 uid="uid://bdldxaka32a6w"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_427ti"]
 [ext_resource type="PackedScene" uid="uid://3jyy2ushgi0" path="res://scenes/testbed.tscn" id="2_a27nq"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c35p46nb6m26w" path="res://scenes/testbed_2.tscn" id="2_tcuku"]
 [ext_resource type="Texture2D" uid="uid://iwa2fq84sdrv" path="res://assets/art/Tilemap/title_screen.png" id="3_ahafd"]
 [ext_resource type="PackedScene" uid="uid://cbvah23wyy74o" path="res://scenes/level_4.tscn" id="4_ipy7d"]
+[ext_resource type="AudioStream" uid="uid://bkjkh7ww45pe1" path="res://assets/audio/music/Icy-Title.ogg" id="7_7rkhp"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("level_choices") groups=["level_loader"]]
 layout_mode = 3
@@ -168,6 +169,10 @@ text = "next_page
 [node name="close" type="Button" parent="leaderboard_container/MarginContainer/leaderboard"]
 layout_mode = 2
 text = "close"
+
+[node name="Icy Title" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_7rkhp")
+bus = &"Music"
 
 [connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer/start" to="." method="_on_start_pressed"]
 [connection signal="toggled" from="CenterContainer/HBoxContainer/VBoxContainer/choose_level" to="." method="_on_choose_level_toggled"]
