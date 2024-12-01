@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://domm6pbbbfsyr"]
+[gd_scene load_steps=41 format=3 uid="uid://domm6pbbbfsyr"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_j1fod"]
 [ext_resource type="Texture2D" uid="uid://bpe8ko3808nll" path="res://assets/art/sprites/player.png" id="2_5ntw6"]
@@ -12,22 +12,8 @@
 [ext_resource type="AudioStream" uid="uid://dgou43k34uiwd" path="res://assets/audio/sfx/icy_land1.wav" id="10_grmmi"]
 [ext_resource type="AudioStream" uid="uid://cieq8pa0x2tmm" path="res://assets/audio/sfx/icy_splat1.wav" id="11_vkwcc"]
 [ext_resource type="Texture2D" uid="uid://s2akhmmw2m1w" path="res://assets/art/vfx/star.png" id="12_3q7mm"]
+[ext_resource type="AudioStream" uid="uid://wll57brepee4" path="res://assets/audio/sfx/icy_dash.wav" id="12_7p3yj"]
 [ext_resource type="Texture2D" uid="uid://c6htffp1nkn1l" path="res://assets/art/vfx/rainbow_vfx.png" id="13_s520c"]
-
-[sub_resource type="Animation" id="Animation_gfffn"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sfx_splat:playing")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_gfffn"]
 length = 0.001
@@ -432,7 +418,13 @@ bus = &"SFX"
 
 [node name="sfx_splat" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_vkwcc")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="sfx_dash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_7p3yj")
 volume_db = -2.0
+max_polyphony = 2
 bus = &"SFX"
 
 [node name="DashParticles" type="GPUParticles2D" parent="."]

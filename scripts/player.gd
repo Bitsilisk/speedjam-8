@@ -23,6 +23,8 @@ const FLOW_DECAY_RATE = 1
 @onready var sfx_wallkick: AudioStreamPlayer = $sfx_wallkick
 @onready var sfx_land: AudioStreamPlayer = $sfx_land
 @onready var sfx_splat: AudioStreamPlayer = $sfx_splat
+@onready var sfx_dash: AudioStreamPlayer = $sfx_dash
+
 
 # Flow, increases top speed
 var flow:float = 0
@@ -121,6 +123,7 @@ func dash():
 	velocity.x = DASH_SPEED * sign(last_velocity.x)
 	velocity.y = 0
 	player_ui.flow_bar.value = 0
+	sfx_dash.play()
 	
 
 func jump():

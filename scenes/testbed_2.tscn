@@ -1,10 +1,9 @@
-[gd_scene load_steps=18 format=4 uid="uid://c35p46nb6m26w"]
+[gd_scene load_steps=17 format=4 uid="uid://c35p46nb6m26w"]
 
 [ext_resource type="Texture2D" uid="uid://bpsg5t6kxamyr" path="res://assets/art/Tilemap/tilemap_levels2.png" id="1_x57sf"]
 [ext_resource type="Texture2D" uid="uid://dcwyewygmjxn4" path="res://assets/art/Tilemap/tilemap_levels3.png" id="2_cww44"]
 [ext_resource type="PackedScene" uid="uid://domm6pbbbfsyr" path="res://scenes/player.tscn" id="3_oi42w"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_prgd1"]
-[ext_resource type="Script" path="res://scenes/level_end.gd" id="5_3cxhj"]
 [ext_resource type="Texture2D" uid="uid://btlc4o0enf0kb" path="res://assets/art/Tilemap/end_flag.png" id="6_s4wqf"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_n04ni"]
@@ -750,7 +749,6 @@ script = ExtResource("4_prgd1")
 [node name="level_end" type="Area2D" parent="."]
 position = Vector2(204, 410)
 collision_layer = 4
-script = ExtResource("5_3cxhj")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="level_end"]
