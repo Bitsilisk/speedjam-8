@@ -22,6 +22,7 @@ var get_name_http = HTTPRequest.new()
 @onready var name_enter = $name_enter
 @onready var player_score = $player_score
 var current_name
+var current_page = 0
 
 func _ready():
 	_authentication_request()
@@ -131,7 +132,7 @@ func _on_player_score_request_completed(result, response_code, headers, body):
 
 func _get_leaderboards():
 	print("Getting leaderboards")
-	var url = "https://api.lootlocker.io/game/leaderboards/"+leaderboard_key+"/list?count=5"
+	var url = "https://api.lootlocker.io/game/leaderboards/"+leaderboard_key+"/list?count=25"
 	var headers = ["Content-Type: application/json", "x-session-token:"+session_token]
 	
 	# Create a request node for getting the highscore
@@ -150,25 +151,45 @@ func _on_leaderboard_request_completed(result, response_code, headers, body):
 	print(json.get_data())
 	
 	# Formatting as a leaderboard
-	var leaderboardFormatted = ""
-	for n in json.get_data().items.size():
-		leaderboardFormatted += str(json.get_data().items[n].rank)+str(". ")
-		var player_name = str(json.get_data().items[n].player.name)
-		var id = str(json.get_data().items[n].player.id)
-		var id_or_name
-		if player_name == "":
-			id_or_name = id
-		else:
-			id_or_name = player_name
-		leaderboardFormatted += id_or_name+str(" - ")
-		leaderboardFormatted += str(json.get_data().items[n].score)+' sec'+str("\n")
+	#var leaderboardFormatted = ""
+	paginate_response(json)
+	#get_page(0)
+	#for n in json.get_data().items.size():
+		#leaderboardFormatted += str(json.get_data().items[n].rank)+str(". ")
+		#var player_name = str(json.get_data().items[n].player.name)
+		#var id = str(json.get_data().items[n].player.id)
+		#var id_or_name
+		#if player_name == "":
+			#id_or_name = id
+		#else:
+			#id_or_name = player_name
+		#leaderboardFormatted += id_or_name+str(" - ")
+		#leaderboardFormatted += str(json.get_data().items[n].score)+' sec'+str("\n")
 	# Print the formatted leaderboard to the console
-	all_score.set_text(leaderboardFormatted)
+	all_score.set_text(pages[current_page])
 	
 	# Clear node
 	leaderboard_http.queue_free()
 
+var pages = []
+func paginate_response(json: JSON):
+	for _i in range(5):
+		var leaderboardFormatted = ""
+		for n in json.get_data().items.size():
+			leaderboardFormatted += str(json.get_data().items[n].rank)+str(". ")
+			var player_name = str(json.get_data().items[n].player.name)
+			var id = str(json.get_data().items[n].player.id)
+			var id_or_name
+			if player_name == "":
+				id_or_name = id
+			else:
+				id_or_name = player_name
+			leaderboardFormatted += id_or_name+str(" - ")
+			leaderboardFormatted += str(json.get_data().items[n].score)+' sec'+str("\n")
+		pages.append(leaderboardFormatted)
 
+#func get_page(idx):
+	
 func _upload_score(score: int):
 	var data = { "score": str(score) }
 	var headers = ["Content-Type: application/json", "x-session-token:"+session_token]
@@ -241,3 +262,13 @@ func _on_upload_score_request_completed(result, response_code, headers, body) :
 	
 	# Clear node
 	submit_score_http.queue_free()
+
+
+func _on_next_page_pressed() -> void:
+	current_page += 1
+	all_score.set_text(pages[current_page])
+
+
+func _on_prev_page_pressed() -> void:
+	current_page -= 1
+	all_score.set_text(pages[current_page])
