@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://domm6pbbbfsyr"]
+[gd_scene load_steps=39 format=3 uid="uid://domm6pbbbfsyr"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_j1fod"]
 [ext_resource type="Texture2D" uid="uid://bpe8ko3808nll" path="res://assets/art/sprites/player.png" id="2_5ntw6"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://c500eww8uikyx" path="res://assets/audio/sfx/icy_jump1.wav" id="8_id4vu"]
 [ext_resource type="AudioStream" uid="uid://crl3u6up67mag" path="res://assets/audio/sfx/icy_wallkick1.wav" id="9_3huay"]
 [ext_resource type="AudioStream" uid="uid://dgou43k34uiwd" path="res://assets/audio/sfx/icy_land1.wav" id="10_grmmi"]
+[ext_resource type="AudioStream" uid="uid://b0a62iddbbgdm" path="res://assets/audio/sfx/icy_ff1.wav" id="10_j2rqp"]
 [ext_resource type="AudioStream" uid="uid://cieq8pa0x2tmm" path="res://assets/audio/sfx/icy_splat1.wav" id="11_vkwcc"]
 [ext_resource type="Texture2D" uid="uid://s2akhmmw2m1w" path="res://assets/art/vfx/star.png" id="12_3q7mm"]
 [ext_resource type="AudioStream" uid="uid://wll57brepee4" path="res://assets/audio/sfx/icy_dash.wav" id="12_bk7sx"]
@@ -405,6 +406,11 @@ stream = ExtResource("12_bk7sx")
 [node name="sfx_splat" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_vkwcc")
 volume_db = -10.0
+bus = &"SFX"
+
+[node name="sfx_fastfall" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_j2rqp")
+volume_db = -8.0
 bus = &"SFX"
 
 [node name="DashParticles" type="GPUParticles2D" parent="."]
