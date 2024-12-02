@@ -4,21 +4,28 @@ extends Control
 @export var game_node:Node2D
 @export var main_menu:Control
 @export var level_end_screen:Control
+@export var end_screen:Control
 
+var scores:Array[float]
 var current_level_index:int = -1
 
-# Called when the node enters the scene tree for the first time.
+var current_record:String:
+	get:
+		print("Getting score for {0}".format([current_level_index]))
+		return "{0}:{1}".format([
+			"%d" % floor(scores[current_level_index]/60.0),
+			"%2.2f" % fmod(scores[current_level_index],60)
+		])
+		
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	for level_index in range(levels.size()):
+		scores.append(-1)
+	show_main_menu()
 
 func show_main_menu():
 	unload_all()
 	main_menu.show()
+	main_menu.reset_buttons()
 
 func load_level(index:int) -> bool:
 	if levels.size() == index:
@@ -61,6 +68,34 @@ func unload_all(replace_with:int = -1) -> void:
 	for child in game_node.get_children():
 		child.queue_free()
 
+func register_score(score:float) -> bool:
+	if scores[current_level_index] > score or scores[current_level_index] < 0:
+		print("setting score for {0} to {1}".format([current_level_index, score]))
+		scores[current_level_index] = score
+		return true
+	return false
+
 func next_level():
 	var valid_level:bool = load_level(current_level_index + 1)
-	print("loading next level: {0}".format([valid_level]))
+	if valid_level:
+		return
+	else:
+		end_screen.show()
+
+func has_completed_all():
+	for score in scores:
+		if score == -1:
+			return false
+	return true
+	
+func get_total_time()->float:
+	var total:float = 0
+	for score in scores:
+		total += score
+	return total
+
+func time_to_string(time:float) -> String:
+	return "{0}:{1}".format([
+		"%d" % floor(time/60.0),
+		"%2.2f" % fmod(time,60)
+	])

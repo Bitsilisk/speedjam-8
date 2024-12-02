@@ -7,7 +7,6 @@
 bg_color = Color(0, 0, 0, 0.941176)
 
 [node name="LeaderboardContainer" type="MarginContainer"]
-visible = false
 offset_right = 640.0
 offset_bottom = 360.0
 theme_override_constants/margin_left = 4

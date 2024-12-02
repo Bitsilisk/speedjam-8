@@ -14,12 +14,14 @@ duration = 1.0
 transition = 0
 ease = 2
 
-[node name="PlayerManager" type="Node2D" node_paths=PackedStringArray("phantom_camera", "camera", "pause_menu")]
+[node name="PlayerManager" type="Node2D" node_paths=PackedStringArray("phantom_camera", "camera", "pause_menu", "player_hud")]
+process_mode = 1
 script = ExtResource("1_6n8fn")
 PlayerScene = ExtResource("3_ahntl")
 phantom_camera = NodePath("PhantomCamera2D")
 camera = NodePath("Camera2D")
 pause_menu = NodePath("HUDLayer/PauseMenu")
+player_hud = NodePath("HUDLayer/PlayerHud")
 
 [node name="PhantomCamera2D" type="Node2D" parent="."]
 script = ExtResource("1_b3a2u")
@@ -41,4 +43,5 @@ script = ExtResource("4_75cov")
 [node name="PauseMenu" parent="HUDLayer" instance=ExtResource("5_dq1vk")]
 visible = false
 
-[node name="PlayerHud" parent="HUDLayer" instance=ExtResource("5_sf40c")]
+[node name="PlayerHud" parent="HUDLayer" node_paths=PackedStringArray("player_manager") instance=ExtResource("5_sf40c")]
+player_manager = NodePath("../..")

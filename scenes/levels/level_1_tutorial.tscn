@@ -679,7 +679,6 @@ tile_map_data = PackedByteArray("AADt/wEAAQADABAAAADu/wEAAQACABAAAADv/wEAAQADABA
 tile_set = SubResource("TileSet_tbskw")
 
 [node name="tutorial guide notes to add gui" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -847,4 +846,4 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(-575, 13)
 
 [node name="Flag" parent="." instance=ExtResource("11_1hxe2")]
-position = Vector2(-417, 6)
+position = Vector2(281, 456)

@@ -1,14 +1,18 @@
 extends Control
 
-@export var time_label:Label
+@export var label:Label
 
 @onready var main = get_node("/root/Main")
 
 var player_manager:PlayerManager
 
 func _on_visibility_changed():
-	if is_instance_valid(player_manager):
-		time_label.text = "Level Time: {0}".format([player_manager.time])
+	if is_instance_valid(player_manager) and visible:
+		var best_score:bool = main.register_score(player_manager.time)
+		if best_score:
+			label.text = "New personal record!"
+		else:
+			label.text = "Old record: {0}".format([main.current_record])
 	
 	var tree:SceneTree = get_tree()
 	if not is_instance_valid(tree):
@@ -17,10 +21,10 @@ func _on_visibility_changed():
 
 
 func _on_again_pressed():
-	player_manager._reset()
 	hide()
+	player_manager._reset()
 
 
 func _on_next_level_pressed():
-	main.next_level()
 	hide()
+	main.next_level()

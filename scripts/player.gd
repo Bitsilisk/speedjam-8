@@ -77,7 +77,7 @@ func handle_input(delta:float):
 			
 	if Input.is_action_pressed("use_flow") and not is_zero_approx(flow_amount) and not is_on_floor():
 		flow += FLOW_BUILD_RATE
-		flow_amount -= 2
+		flow_amount = max(0, flow_amount - 2)
 		heart_particales.emitting = true
 		using_flow = true
 		icy_flow.volume_db = 0.0
@@ -92,7 +92,7 @@ func handle_input(delta:float):
 
 func apply_horizontal_movement(delta:float, multiplier:float=1):
 	var new_direction = get_input_direction()
-	var new_velocity:float = new_direction * SPEED * delta * 1000.
+	var new_velocity:float = new_direction * SPEED * delta * 1000. * multiplier
 	if abs(velocity.x + new_velocity) < get_top_speed():
 		if new_direction != sign(last_velocity.x):
 			new_velocity *= 2
@@ -121,7 +121,7 @@ func check_stun():
 func dash():
 #	Gets the direction of the dash, fun fact Input.get_vector() has a weird bug where it's slightly off tilt.
 #	I aint dealing with that issue again.
-	if not flow_amount == 100:
+	if not is_equal_approx(flow_amount, 100):
 		return
 	dash_particles.emitting = true
 	velocity.x = DASH_SPEED * sign(last_velocity.x)
@@ -146,4 +146,4 @@ func is_flow_speed() -> bool:
 
 func check_flow_state():
 	if is_flow_speed() and is_on_floor():
-		flow_amount += 1
+		flow_amount = min(100, flow_amount + 1)

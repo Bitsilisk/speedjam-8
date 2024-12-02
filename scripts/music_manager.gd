@@ -9,6 +9,8 @@ func _ready():
 		child.stop()
 	
 func play(track:String):
+	if disabled:
+		return
 	var target:AudioStreamPlayer = find_child(track)
 	var children = get_children()
 	if not is_instance_valid(target):

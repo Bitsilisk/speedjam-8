@@ -5,6 +5,7 @@ class_name PlayerManager
 @export var phantom_camera:PhantomCamera2D
 @export var camera:Camera2D
 @export var pause_menu:Control
+@export var player_hud:Control
 var time:float = 0.
 var player:Player
 # Called when the node enters the scene tree for the first time.

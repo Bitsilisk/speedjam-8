@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://dejhsital8kuo"]
+[gd_scene load_steps=19 format=3 uid="uid://dejhsital8kuo"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_3ufg0"]
 [ext_resource type="PackedScene" uid="uid://c2f75ss4k6uba" path="res://scenes/music_manager.tscn" id="1_300cy"]
+[ext_resource type="PackedScene" uid="uid://bh3my8ljgw02s" path="res://scenes/leaderboard.tscn" id="2_em8um"]
 [ext_resource type="PackedScene" uid="uid://c35p46nb6m26w" path="res://scenes/levels/level_1_tutorial.tscn" id="2_uv5s6"]
 [ext_resource type="PackedScene" uid="uid://bdldxaka32a6w" path="res://scenes/main_menu.tscn" id="2_wl0pp"]
 [ext_resource type="AudioStream" uid="uid://c8eextcdp3dbw" path="res://assets/audio/sfx/icy_uihoverA.wav" id="3_2iioh"]
@@ -15,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://bic1r6kiobaqo" path="res://assets/audio/sfx/icy_uihoverG.wav" id="7_ddyam"]
 [ext_resource type="AudioStream" uid="uid://bja6thudab6hb" path="res://assets/audio/sfx/icy_uiclick.wav" id="8_a8cvk"]
 [ext_resource type="PackedScene" uid="uid://b4edtiuiujfgs" path="res://scenes/level_end_screen.tscn" id="9_cqh7f"]
+[ext_resource type="PackedScene" uid="uid://bxeyibig25llp" path="res://scenes/end_screen.tscn" id="10_7p6e5"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sm0iu"]
 streams_count = 5
@@ -26,7 +28,7 @@ stream_3/stream = ExtResource("6_i4lgk")
 stream_4/stream = ExtResource("7_ddyam")
 stream_4/weight = 0.25
 
-[node name="Main" type="Control" node_paths=PackedStringArray("game_node", "main_menu", "level_end_screen")]
+[node name="Main" type="Control" node_paths=PackedStringArray("game_node", "main_menu", "level_end_screen", "end_screen")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -37,19 +39,27 @@ grow_vertical = 2
 script = ExtResource("1_3ufg0")
 levels = Array[PackedScene]([ExtResource("2_uv5s6"), ExtResource("3_kdc1k"), ExtResource("4_mbm5s"), ExtResource("5_ylr2j"), ExtResource("6_edjsb")])
 game_node = NodePath("Game")
-main_menu = NodePath("MainMenu")
+main_menu = NodePath("CanvasLayer/MainMenu")
 level_end_screen = NodePath("CanvasLayer/LevelEndScreen")
+end_screen = NodePath("CanvasLayer/EndScreen")
 
 [node name="MusicManager" parent="." instance=ExtResource("1_300cy")]
 unique_name_in_owner = true
-
-[node name="MainMenu" parent="." node_paths=PackedStringArray("game_node") instance=ExtResource("2_wl0pp")]
-layout_mode = 1
-game_node = NodePath("../Game")
+disabled = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="MainMenu" parent="CanvasLayer" node_paths=PackedStringArray("leaderboard", "game_node") instance=ExtResource("2_wl0pp")]
+leaderboard = NodePath("../LeaderboardContainer")
+game_node = NodePath("../../Game")
+
 [node name="LevelEndScreen" parent="CanvasLayer" instance=ExtResource("9_cqh7f")]
+visible = false
+
+[node name="EndScreen" parent="CanvasLayer" instance=ExtResource("10_7p6e5")]
+visible = false
+
+[node name="LeaderboardContainer" parent="CanvasLayer" instance=ExtResource("2_em8um")]
 visible = false
 
 [node name="Game" type="Node2D" parent="."]
@@ -61,5 +71,3 @@ bus = &"SFX"
 [node name="sfx_uiclick" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_a8cvk")
 bus = &"SFX"
-
-[connection signal="visibility_changed" from="MainMenu" to="MainMenu" method="_on_visibility_changed"]
