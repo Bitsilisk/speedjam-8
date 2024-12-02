@@ -25,6 +25,7 @@ const FLOW_DECAY_RATE = 1
 @onready var sfx_splat: AudioStreamPlayer = $sfx_splat
 @onready var sfx_dash: AudioStreamPlayer = $sfx_dash
 @onready var icy_flow: AudioStreamPlayer = $IcyFlow
+@onready var sfx_fastfall: AudioStreamPlayer = $sfx_fastfall
 
 var flow_amount:float = 0
 
@@ -74,6 +75,7 @@ func handle_input(delta:float):
 		if Input.is_action_just_pressed("fast_fall"):
 			velocity.y += JUMP_SPEED
 			fast_fall_particles.emitting = true
+			sfx_fastfall.play()
 			
 	if Input.is_action_pressed("use_flow") and not is_zero_approx(flow_amount) and not is_on_floor():
 		flow += FLOW_BUILD_RATE
