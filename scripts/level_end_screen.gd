@@ -15,11 +15,12 @@ func _on_visibility_changed():
 			label.text = "New personal record!"
 		else:
 			label.text = "Old record: {0}".format([main.current_record])
-	$IcyWin.play()
 	var tree:SceneTree = get_tree()
 	if not is_instance_valid(tree):
 		return
 	tree.paused = visible
+	if visible:
+		$IcyWin.play()
 
 
 func _on_again_pressed():

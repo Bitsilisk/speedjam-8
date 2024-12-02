@@ -19,7 +19,7 @@ func play(track:String):
 		
 	for child:AudioStreamPlayer in get_children():
 		if child != target and child.playing:
-			var tween:Tween = create_fade_tween(child, 0, db_to_linear(child.volume_db))
+			var tween:Tween = create_fade_tween(child, 0)
 			tween.finished.connect(func():
 				child.stop()
 			)
