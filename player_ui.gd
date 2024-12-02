@@ -10,14 +10,14 @@ var total_time:float = 0
 func _ready():
 	timer.start()
 
-func _process(_delta) -> void:
-	if Input.is_action_just_pressed("restart"):
-		get_tree().paused = false
-		var level_loader = get_tree().get_first_node_in_group("level_loader")
-		if level_loader:
-			level_loader.reload_level()
-		else:
-			get_tree().reload_current_scene()
+#func _process(_delta) -> void:
+	#if Input.is_action_just_pressed("restart"):
+		#get_tree().paused = false
+		#var level_loader = get_tree().get_first_node_in_group("level_loader")
+		#if level_loader:
+			#level_loader.reload_level()
+		#else:
+			#get_tree().reload_current_scene()
 		
 func _on_timer_timeout() -> void:
 	total_time += 1

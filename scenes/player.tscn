@@ -1,12 +1,9 @@
-[gd_scene load_steps=43 format=3 uid="uid://domm6pbbbfsyr"]
+[gd_scene load_steps=38 format=3 uid="uid://domm6pbbbfsyr"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_j1fod"]
 [ext_resource type="Texture2D" uid="uid://bpe8ko3808nll" path="res://assets/art/sprites/player.png" id="2_5ntw6"]
 [ext_resource type="Script" path="res://scripts/animation_player.gd" id="3_kuqbb"]
 [ext_resource type="Texture2D" uid="uid://dlhtreyg365bu" path="res://assets/art/vfx/heart.png" id="4_68m44"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="4_v484h"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_kljcr"]
-[ext_resource type="PackedScene" uid="uid://dyxx0rqk7uwp5" path="res://scenes/player_ui.tscn" id="5_prpfk"]
 [ext_resource type="AudioStream" uid="uid://c500eww8uikyx" path="res://assets/audio/sfx/icy_jump1.wav" id="8_id4vu"]
 [ext_resource type="AudioStream" uid="uid://crl3u6up67mag" path="res://assets/audio/sfx/icy_wallkick1.wav" id="9_3huay"]
 [ext_resource type="AudioStream" uid="uid://dgou43k34uiwd" path="res://assets/audio/sfx/icy_land1.wav" id="10_grmmi"]
@@ -14,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://s2akhmmw2m1w" path="res://assets/art/vfx/star.png" id="12_3q7mm"]
 [ext_resource type="AudioStream" uid="uid://wll57brepee4" path="res://assets/audio/sfx/icy_dash.wav" id="12_bk7sx"]
 [ext_resource type="Texture2D" uid="uid://c6htffp1nkn1l" path="res://assets/art/vfx/rainbow_vfx.png" id="13_s520c"]
-[ext_resource type="AudioStream" uid="uid://cwktxlaw3ulih" path="res://assets/audio/music/Icy-Fun.ogg" id="14_7rj2t"]
 [ext_resource type="AudioStream" uid="uid://bfan3vooesrfw" path="res://assets/audio/music/icy_flow.ogg" id="15_1xxnv"]
 
 [sub_resource type="Animation" id="Animation_gfffn"]
@@ -280,12 +276,6 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ukklg"]
 size = Vector2(7, 14)
 
-[sub_resource type="Resource" id="Resource_bosl4"]
-script = ExtResource("5_kljcr")
-duration = 1.0
-transition = 0
-ease = 2
-
 [sub_resource type="Curve" id="Curve_1kerf"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.238845, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
@@ -349,6 +339,7 @@ scale_min = 0.0
 alpha_curve = SubResource("CurveTexture_bbmsk")
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+process_mode = 1
 collision_mask = 13
 script = ExtResource("1_j1fod")
 
@@ -386,14 +377,6 @@ position = Vector2(0.5, 6)
 shape = SubResource("RectangleShape2D_ukklg")
 metadata/_edit_lock_ = true
 
-[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
-script = ExtResource("4_v484h")
-follow_mode = 2
-follow_target = NodePath("..")
-tween_resource = SubResource("Resource_bosl4")
-follow_damping = true
-metadata/_edit_lock_ = true
-
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 50
@@ -403,8 +386,6 @@ lifetime = 0.2
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(16, 0)
-
-[node name="player_ui" parent="." instance=ExtResource("5_prpfk")]
 
 [node name="sfx_jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_id4vu")
@@ -442,13 +423,7 @@ texture = ExtResource("13_s520c")
 one_shot = true
 explosiveness = 0.8
 
-[node name="Icy Fun" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("14_7rj2t")
-autoplay = true
-bus = &"Music"
-
-[node name="Icy Flow" type="AudioStreamPlayer" parent="."]
+[node name="IcyFlow" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_1xxnv")
 volume_db = -80.0
-autoplay = true
 bus = &"Music"
