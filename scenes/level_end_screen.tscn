@@ -51,6 +51,8 @@ text = "Next Level"
 
 [node name="IcyWin" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_gslse")
+volume_db = 2.0
+bus = &"SFX"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/again" to="." method="_on_again_pressed"]
