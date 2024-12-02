@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b2kupenuwne5a"]
+[gd_scene load_steps=3 format=3 uid="uid://b2kupenuwne5a"]
 
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_5o1ba"]
+[ext_resource type="AudioStream" uid="uid://bja6thudab6hb" path="res://assets/audio/sfx/icy_uiclick.wav" id="2_6njq3"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 2
@@ -36,6 +37,10 @@ process_priority = 2
 layout_mode = 2
 text = "Exit (all progress will be lost)
 "
+
+[node name="sfx_uiclick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_6njq3")
+bus = &"SFX"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/resume" to="." method="_on_resume_pressed"]

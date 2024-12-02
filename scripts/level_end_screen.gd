@@ -4,6 +4,8 @@ extends Control
 
 @onready var main = get_node("/root/Main")
 
+@onready var sfx_uiclick: AudioStreamPlayer = $"../../sfx_uiclick"
+
 var player_manager:PlayerManager
 
 func _on_visibility_changed():
@@ -21,10 +23,12 @@ func _on_visibility_changed():
 
 
 func _on_again_pressed():
+	sfx_uiclick.play()
 	hide()
 	player_manager._reset()
 
 
 func _on_next_level_pressed():
+	sfx_uiclick.play()
 	hide()
 	main.next_level()

@@ -15,25 +15,32 @@ var curr_level_time: int
 @onready var level_time = $between_levels/MarginContainer/HBoxContainer/level_time
 @onready var end_screen = $end_screen
 @onready var total_time_text = $end_screen/CenterContainer/VBoxContainer/total_time
+@onready var sfx_uiclick: AudioStreamPlayer = $sfx_uiclick
 
 func _on_start_pressed() -> void:
+	sfx_uiclick.play()
 	main.load_level(0)
 
 func _on_choose_level_toggled(toggled_on: bool) -> void:
+	sfx_uiclick.play()
 	credits.visible = false
 	level_choices.visible = toggled_on
 
 func _on_leaderboard_pressed() -> void:
+	sfx_uiclick.play()
 	leaderboard.show()
 
 func _on_close_pressed() -> void:
+	sfx_uiclick.play()
 	leaderboard.hide()
 
 func _on_credits_toggled(toggled_on: bool) -> void:
+	sfx_uiclick.play()
 	level_choices.visible = false
 	credits.visible = toggled_on
 	
 func _on_submit_time_pressed() -> void:
+	sfx_uiclick.play()
 	leaderboard_logic.load_new_info(total_time_all_levels)
 	end_screen.hide()
 	leaderboard_logic.update_info()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdldxaka32a6w"]
+[gd_scene load_steps=4 format=3 uid="uid://bdldxaka32a6w"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_427ti"]
 [ext_resource type="Texture2D" uid="uid://iwa2fq84sdrv" path="res://assets/art/Tilemap/title_screen.png" id="3_ahafd"]
+[ext_resource type="AudioStream" uid="uid://bja6thudab6hb" path="res://assets/audio/sfx/icy_uiclick.wav" id="3_taiyl"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("level_choices", "credits") groups=["level_loader"]]
 layout_mode = 3
@@ -104,6 +105,10 @@ Coding - Caaz, ArturGinRad
 SFX & Music - Joe"
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="sfx_uiclick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_taiyl")
+bus = &"SFX"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/start" to="." method="_on_start_pressed"]
