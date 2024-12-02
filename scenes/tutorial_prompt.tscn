@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://cd3swfvenuluk"]
+
+[ext_resource type="Script" path="res://tutorial_prompt.gd" id="1_1bcyi"]
+
+[node name="TutorialPrompt" type="Area2D"]
+script = ExtResource("1_1bcyi")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+text = "Hello World"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
