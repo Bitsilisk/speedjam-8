@@ -11,7 +11,7 @@ func _on_visibility_changed():
 	
 	if not visible or not is_instance_valid(main):
 		return
-	
+	%MusicManager.play("Win")
 	if main.has_completed_all():
 		var total_time = main.get_total_time()
 		label.text = "The End!\n\nTotal Time\n{0}\n\nThanks for playing!".format([
@@ -19,3 +19,8 @@ func _on_visibility_changed():
 		])
 	else:
 		label.text = "The End!\n\nComplete all levels for a total time!\n\nThanks for playing!"
+
+
+func _on_button_pressed():
+	hide()
+	main.show_main_menu()

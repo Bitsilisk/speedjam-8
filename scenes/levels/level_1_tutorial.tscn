@@ -689,7 +689,7 @@ tile_set = SubResource("TileSet_tbskw")
 position = Vector2(-575, 13)
 
 [node name="Flag" parent="." instance=ExtResource("11_1hxe2")]
-position = Vector2(281, 456)
+position = Vector2(278, 453)
 
 [node name="TutorialPrompt" parent="." instance=ExtResource("10_16nvf")]
 position = Vector2(-534, -132)
