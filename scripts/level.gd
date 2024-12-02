@@ -1,8 +1,11 @@
 extends Node2D
+class_name Level
 
 var next_level:int
+var flag:Area2D:
+	get:
+		return find_child("Flag")
 
-
-func _on_flag_body_entered(body):
-	if body is Player:
-		print("player hit flag!")
+var player_manager:PlayerManager:
+	get:
+		return find_child("PlayerManager")
