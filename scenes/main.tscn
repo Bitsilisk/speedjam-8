@@ -1,8 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://dejhsital8kuo"]
+[gd_scene load_steps=18 format=3 uid="uid://dejhsital8kuo"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_3ufg0"]
 [ext_resource type="PackedScene" uid="uid://c2f75ss4k6uba" path="res://scenes/music_manager.tscn" id="1_300cy"]
-[ext_resource type="PackedScene" uid="uid://bh3my8ljgw02s" path="res://scenes/leaderboard.tscn" id="2_em8um"]
 [ext_resource type="PackedScene" uid="uid://c35p46nb6m26w" path="res://scenes/levels/level_1_tutorial.tscn" id="2_uv5s6"]
 [ext_resource type="PackedScene" uid="uid://bdldxaka32a6w" path="res://scenes/main_menu.tscn" id="2_wl0pp"]
 [ext_resource type="AudioStream" uid="uid://c8eextcdp3dbw" path="res://assets/audio/sfx/icy_uihoverA.wav" id="3_2iioh"]
@@ -49,17 +48,13 @@ disabled = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MainMenu" parent="CanvasLayer" node_paths=PackedStringArray("leaderboard", "game_node") instance=ExtResource("2_wl0pp")]
-leaderboard = NodePath("../LeaderboardContainer")
+[node name="MainMenu" parent="CanvasLayer" node_paths=PackedStringArray("game_node") instance=ExtResource("2_wl0pp")]
 game_node = NodePath("../../Game")
 
 [node name="LevelEndScreen" parent="CanvasLayer" instance=ExtResource("9_cqh7f")]
 visible = false
 
 [node name="EndScreen" parent="CanvasLayer" instance=ExtResource("10_7p6e5")]
-visible = false
-
-[node name="LeaderboardContainer" parent="CanvasLayer" instance=ExtResource("2_em8um")]
 visible = false
 
 [node name="Game" type="Node2D" parent="."]

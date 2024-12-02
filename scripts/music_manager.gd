@@ -27,7 +27,7 @@ func play(track:String):
 	target.volume_db = linear_to_db(1)
 	target.play()
 	
-func create_fade_tween(track_node:AudioStreamPlayer, volume:float, duration:float=1.0) -> Tween:
+func create_fade_tween(track_node:AudioStreamPlayer, volume:float, duration:float=.1) -> Tween:
 	var tween:Tween = create_tween()
-	tween.tween_property(track_node, "volume_db", volume, 0.1)
+	tween.tween_property(track_node, "volume_db", volume, duration)
 	return tween

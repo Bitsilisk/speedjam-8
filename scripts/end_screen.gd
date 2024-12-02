@@ -8,7 +8,6 @@ func _on_visibility_changed():
 	if not is_instance_valid(tree):
 		return
 	tree.paused = visible
-	
 	if not visible or not is_instance_valid(main):
 		return
 	%MusicManager.play("Win")

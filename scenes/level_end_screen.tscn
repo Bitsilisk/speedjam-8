@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4edtiuiujfgs"]
+[gd_scene load_steps=4 format=3 uid="uid://b4edtiuiujfgs"]
 
 [ext_resource type="StyleBox" uid="uid://dtbi1sq0ahxe" path="res://assets/art/ui/pink_button_style.tres" id="1_7hpt8"]
 [ext_resource type="Script" path="res://scripts/level_end_screen.gd" id="1_lv8ne"]
+[ext_resource type="AudioStream" uid="uid://yjpk64j1vlgf" path="res://assets/audio/sfx/icy_win.wav" id="3_gslse"]
 
 [node name="LevelEndScreen" type="Control" node_paths=PackedStringArray("label")]
 layout_mode = 3
@@ -47,6 +48,9 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("1_7hpt8")
 text = "Next Level"
+
+[node name="IcyWin" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gslse")
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/again" to="." method="_on_again_pressed"]

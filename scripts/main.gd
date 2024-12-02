@@ -36,7 +36,6 @@ func load_level(index:int) -> bool:
 		return false
 	
 	var level = ready_level(levels[index])
-	level.flag
 	
 	var current_level = game_node.get_child(0)
 	if is_instance_valid(current_level):
@@ -64,7 +63,7 @@ func _add_level(level:Node2D):
 	game_node.add_child(level)
 	main_menu.hide()
 	
-func unload_all(replace_with:int = -1) -> void:
+func unload_all() -> void:
 	for child in game_node.get_children():
 		child.queue_free()
 
