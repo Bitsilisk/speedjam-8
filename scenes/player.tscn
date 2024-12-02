@@ -426,4 +426,5 @@ explosiveness = 0.8
 [node name="IcyFlow" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_1xxnv")
 volume_db = -80.0
+autoplay = true
 bus = &"Music"
