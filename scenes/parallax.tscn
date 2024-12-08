@@ -1,0 +1,101 @@
+[gd_scene load_steps=4 format=3 uid="uid://dysr5qa740tcq"]
+
+[ext_resource type="Texture2D" uid="uid://4eg1b615lbki" path="res://assets/art/Tilemap/Parallax/1st_layer.png" id="1_roc41"]
+[ext_resource type="Texture2D" uid="uid://gpvibk1sokii" path="res://assets/art/Tilemap/Parallax/2nd_layer.png" id="2_pinkd"]
+[ext_resource type="Texture2D" uid="uid://cqt5hekt5ga51" path="res://assets/art/Tilemap/Parallax/3rd_layer.png" id="3_emto3"]
+
+[node name="parallax" type="Node2D"]
+position = Vector2(1321, -115)
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(640, 320)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-1126, -12)
+texture = ExtResource("1_roc41")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 640, 360)
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Asesprite/Projects/speedjam/background/1st_layer.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "7ffc822baa1cff03d52843b437d7c286"
+
+[node name="blue_ice" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.5, 0.5)
+scroll_offset = Vector2(5, 10)
+repeat_size = Vector2(640, 0)
+repeat_times = 3
+limit_begin = Vector2(-1e+07, -200)
+
+[node name="Sprite2D2" type="Sprite2D" parent="blue_ice"]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-1130, -13)
+texture = ExtResource("2_pinkd")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 640, 320)
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Asesprite/Projects/speedjam/background/2nd_layer.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "10df2ee0d4e97cb06eb35d76fa6045cd"
+
+[node name="black_ice" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(640, 0)
+repeat_times = 3
+limit_begin = Vector2(-1e+07, -200)
+
+[node name="Sprite2D" type="Sprite2D" parent="black_ice"]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-1126, -13)
+texture = ExtResource("3_emto3")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 640, 320)
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Asesprite/Projects/speedjam/background/3rd_layer.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "3685732c42826442be4d9c017d818e2b"
